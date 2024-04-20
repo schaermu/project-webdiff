@@ -1,0 +1,31 @@
+{
+	"name": "Docker Compose (Extend)",
+	"dockerComposeFile": [
+		"../docker-compose.yml",
+		"docker-compose.yml"
+	],
+	"service": "webdiff",
+	"remoteUser": "appuser",
+	"features": {
+		"ghcr.io/devcontainers/features/git:1": {}
+	},
+	"workspaceFolder": "/workspace",
+	"customizations": {
+		"vscode": {
+			"settings": {},
+			"extensions": [
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+				"ms-python.black-formatter",
+				"GitHub.copilot",
+				"ms-azuretools.vscode-docker",
+				"EditorConfig.EditorConfig"
+			]
+		}
+	},
+	"forwardPorts": [
+		8000
+	]
+	// Uncomment the next line if you want start specific services in your Docker Compose config.
+	// "runServices": [],
+}
