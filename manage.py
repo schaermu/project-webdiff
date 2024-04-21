@@ -2,14 +2,26 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+import pathlib
+
 from django.core.management.commands.runserver import Command as runserver
 
 runserver.default_addr = "0.0.0.0"
 
 
+BASE_DIR = pathlib.Path(__file__).parent
+
+PATHS = [
+    str(BASE_DIR / "apps"),
+    str(BASE_DIR / "apps" / "backend"),
+]
+
+sys.path.extend(PATHS)
+
+
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "webdiff.settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "backend.settings")
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

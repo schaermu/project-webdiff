@@ -1,5 +1,6 @@
 *.sqlite3
 pgdata/
+.pnpm-store/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
