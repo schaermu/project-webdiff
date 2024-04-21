@@ -1,19 +1,16 @@
-import { defineConfig } from 'vite';
-import solidPlugin from 'vite-plugin-solid';
-import devtools from 'solid-devtools/vite';
+import { fileURLToPath, URL } from 'node:url'
 
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+
+// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    devtools(),
-    solidPlugin(),
+    vue(),
   ],
-  server: {
-    port: 3000,
-    proxy: {
-      '/api': 'http://localhost:8080',
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url))
     }
-  },
-  build: {
-    target: 'esnext',
-  },
-});
+  }
+})
