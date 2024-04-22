@@ -8,7 +8,9 @@
 	"remoteUser": "appuser",
 	"features": {
 		"ghcr.io/devcontainers/features/git:1": {},
-		"ghcr.io/devcontainers/features/node:1": {}
+		"ghcr.io/devcontainers/features/node:1": {
+			"version": "20"
+		}
 	},
 	"workspaceFolder": "/workspace",
 	"customizations": {
@@ -29,7 +31,7 @@
 	},
 	"forwardPorts": [
 		8000
-	]
-	// Uncomment the next line if you want start specific services in your Docker Compose config.
-	// "runServices": [],
+	],
+	"postCreateCommand": "python3 -m venv .venv && . .venv/bin/activate && pip install -r requirements/dev.txt ",
+	"postAttachCommand": ". .venv/bin/activate",
 }
