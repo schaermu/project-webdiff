@@ -35,7 +35,7 @@ const { handleSubmit } = useForm({
 
 const attemptLogin = handleSubmit(values => {
     console.log('Attempting login with:', values)
-    fetch('/api/auth/token/', {
+    fetch('/api/token/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
