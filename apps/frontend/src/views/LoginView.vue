@@ -11,15 +11,14 @@
 </template>
 
 <script setup>
-import { useForm } from 'vee-validate';
+import { useForm } from 'vee-validate'
 import { useRouter } from 'vue-router'
-import { toTypedSchema } from '@vee-validate/yup';
-import * as yup from 'yup';
+import { toTypedSchema } from '@vee-validate/yup'
+import * as yup from 'yup'
 
-import { useAuthStore } from '@/stores/auth'
+import authService from '@/services/auth'
 import TwInput from '@/components/forms/TwInput.vue'
 
-const authStore = useAuthStore()
 const router = useRouter()
 
 const schema = toTypedSchema(
@@ -34,31 +33,13 @@ const { handleSubmit } = useForm({
 });
 
 const attemptLogin = handleSubmit(values => {
-    console.log('Attempting login with:', values)
-    fetch('/api/token/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            username: values.username,
-            password: values.password
+    try {
+        authService.login(values.username, values.password).then(() => {
+            router.push({ name: 'home' })
         })
-    }).then(response => {
-        if (response.ok) {
-            response.json().then(data => {
-                authStore.setAuthState({
-                    accessToken: data.access,
-                    refreshToken: data.refresh
-                })
-                router.push({ name: 'home' })
-            })
-        } else {
-            console.error('Login failed')
-        }
-    }).catch(error => {
+    } catch (error) {
         console.error('Login failed:', error)
-    })
+    }
 })
 
 </script>

@@ -1,21 +1,7 @@
 <script setup lang="ts">
-import { useAuthStore } from '@/stores/auth'
+import userService from '@/services/user'
 
-const authStore = useAuthStore()
-
-const me = fetch('/api/users/me', {
-  headers: {
-    'Authorization': `Bearer ${authStore.accessToken}`
-  }
-}).then(response => {
-  if (response.ok) {
-    return response.json()
-  } else {
-    console.error('Failed to fetch user data')
-  }
-}).catch(error => {
-  console.error('Failed to fetch user data:', error)
-})
+const me = await userService.me()
 </script>
 
 <template>

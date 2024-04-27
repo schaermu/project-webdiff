@@ -26,7 +26,7 @@
 </template>
 
 <script setup>
-import { computed, defineProps } from 'vue';
+import { computed } from 'vue';
 import { useField } from 'vee-validate';
 
 const props = defineProps({

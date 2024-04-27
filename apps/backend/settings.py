@@ -49,10 +49,6 @@ REST_FRAMEWORK = {
     "URL_FIELD_NAME": "@self",
 }
 
-SIMPLE_JWT = {
-    "AUTH_HEADER_TYPES": ("JWT",),
-}
-
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
