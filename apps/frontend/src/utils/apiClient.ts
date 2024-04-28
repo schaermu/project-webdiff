@@ -7,7 +7,7 @@ class ApiClient {
         this._baseUrl += `/${base}`
     }
 
-    _fetch(url: string, method: string, data?: any) {
+    _fetch(url: string | undefined, method: string, data?: any) {
         const headers = {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${useAuthStore().accessToken}`
@@ -15,11 +15,11 @@ class ApiClient {
 
         const body = data ? JSON.stringify(data) : undefined;
 
-        return fetch(`${this._baseUrl}/${url}`, { method, headers, body });
+        return fetch(`${this._baseUrl}/${url ?? ''}`, { method, headers, body });
     }
 
-    async get(url: string) {
-        const res = await this._fetch(url, 'GET')
+    async get(id: string = '') {
+        const res = await this._fetch(id, 'GET')
 
         if (!res.ok) {
             throw new Error('Request failed');
@@ -28,8 +28,8 @@ class ApiClient {
         return await res.json();
     }
 
-    async post(url: string, data: any) {
-        const res = await this._fetch(url, 'POST', data);
+    async post(data: any) {
+        const res = await this._fetch(undefined, 'POST', data);
 
         if (!res.ok) {
             throw new Error('Request failed');
