@@ -4,7 +4,7 @@ import NavigationBar from '@/components/shared/NavigationBar.vue';
 </script>
 
 <template>
-  <div class="flex flex-col w-full h-auto">
+  <div class="flex flex-col w-full h-screen">
     <Suspense>
       <NavigationBar />
     </Suspense>
