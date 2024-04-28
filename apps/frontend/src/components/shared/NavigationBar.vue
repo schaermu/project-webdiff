@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar bg-base-100">
+  <div class="navbar bg-base-300">
     <div class="navbar-start">
       <div class="dropdown">
         <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
@@ -7,41 +7,22 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
           </svg>
         </div>
-        <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-          <li>
-            <RouterLink to="/">Home</RouterLink>
-          </li>
-          <li>
-            <a>Parent</a>
-            <ul class="p-2">
-              <li><a>Submenu 1</a></li>
-              <li><a>Submenu 2</a></li>
-            </ul>
-          </li>
-          <li><a>Item 3</a></li>
+        <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+          v-if="authStore.isAuthenticated">
+          <NavigationItems />
         </ul>
       </div>
-      <RouterLink class="btn btn-ghost text-xl" v-if="!authStore.isAuthenticated" to="/">Login</RouterLink>
+      <div class="flex-1">
+        <RouterLink class="btn btn-ghost text-xl" to="/">webdiff</RouterLink>
+      </div>
     </div>
-    <div class="navbar-center hidden lg:flex">
+    <div class="navbar-center hidden lg:flex flex-none" v-if="authStore.isAuthenticated">
       <ul class="menu menu-horizontal px-1">
-        <li>
-          <RouterLink to="/">Home</RouterLink>
-        </li>
-        <li>
-          <details>
-            <summary>Parent</summary>
-            <ul class="p-2">
-              <li><a>Submenu 1</a></li>
-              <li><a>Submenu 2</a></li>
-            </ul>
-          </details>
-        </li>
-        <li><a>Item 3</a></li>
+        <NavigationItems />
       </ul>
     </div>
     <div class="navbar-end">
-      <RouterLink class="btn" v-if="!authStore.isAuthenticated" to="/">Login</RouterLink>
+      <RouterLink class="btn btn-ghost" v-if="!authStore.isAuthenticated" to="/">Login</RouterLink>
       <div class="dropdown dropdown-end" v-if="authStore.isAuthenticated">
         <div tabindex="0" role="button" class="btn btn-ghost">
           Hello {{ authStore.user?.username }}
@@ -60,6 +41,8 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth';
+
+import NavigationItems from '@/components/shared/NavigationItems.vue'
 
 const router = useRouter()
 const authStore = useAuthStore()
