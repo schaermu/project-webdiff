@@ -16,10 +16,11 @@ import { useRouter } from 'vue-router'
 import { toTypedSchema } from '@vee-validate/yup'
 import * as yup from 'yup'
 
-import authService from '@/services/auth'
+import { useAuthStore } from '@/stores/auth'
 import TwInput from '@/components/forms/TwInput.vue'
 
 const router = useRouter()
+const authStore = useAuthStore()
 
 const schema = toTypedSchema(
     yup.object({
@@ -34,7 +35,7 @@ const { handleSubmit } = useForm({
 
 const attemptLogin = handleSubmit(values => {
     try {
-        authService.login(values.username, values.password).then(() => {
+        authStore.login(values.username, values.password).then(() => {
             router.push({ name: 'home' })
         })
     } catch (error) {

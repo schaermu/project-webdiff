@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import userService from '@/services/user'
+import { useAuthStore } from '@/stores/auth';
 
-const me = await userService.me()
+const authStore = useAuthStore()
 </script>
 
 <template>
-  {{ me }}
+  <pre>
+  {{ authStore.user }}
+  </pre>
 </template>

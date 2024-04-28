@@ -42,10 +42,15 @@
     </div>
     <div class="navbar-end">
       <RouterLink class="btn" v-if="!authStore.isAuthenticated" to="/">Login</RouterLink>
-      <div class="dropdown" v-if="authStore.isAuthenticated">
+      <div class="dropdown dropdown-end" v-if="authStore.isAuthenticated">
         <div tabindex="0" role="button" class="btn btn-ghost">
-          Hello {{ me.value?.username }}
+          Hello {{ authStore.user?.username }}
         </div>
+        <ul tabindex="0" class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box">
+          <li><a>Profile</a></li>
+          <li><a>Settings</a></li>
+          <li><a @click.prevent="logout">Logout</a></li>
+        </ul>
       </div>
     </div>
   </div>
@@ -53,15 +58,14 @@
 
 
 <script setup>
-import { ref } from 'vue'
-import userService from '@/services/user'
+import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth';
 
-let me = ref('')
+const router = useRouter()
 const authStore = useAuthStore()
 
-if (authStore.isAuthenticated) {
-  me.value = await userService.me()
-  console.log(me.value)
+const logout = () => {
+  authStore.logout()
+  router.push({ name: 'login' })
 }
 </script>

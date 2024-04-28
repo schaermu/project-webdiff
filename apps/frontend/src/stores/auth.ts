@@ -1,23 +1,53 @@
-import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import { useLocalStorage } from '@vueuse/core'
+import { computed, ref } from 'vue'
+
+import ApiClient from '@/utils/apiClient'
 
 export const useAuthStore = defineStore('auth', () => {
-  const authState = ref<AuthState | null>(null)
-  useLocalStorage('authState', authState)
+  const authState = ref<AuthState>(), userState = ref<UserState>()
 
-  const accessToken = computed(() => authState.value?.accessToken)
-  const refreshToken = computed(() => authState.value?.refreshToken)
-  const isAuthenticated = computed(() => !!authState.value?.accessToken)
+  const accessToken = computed(() => authState.value?.access)
+  const refreshToken = computed(() => authState.value?.refresh)
+  const isAuthenticated = computed(() => !!authState.value?.access)
+  const user = computed(() => userState.value)
 
-  function setAuthState(state: AuthState | null) {
-    authState.value = state
+  async function fetchUser() {
+    const apiClient = new ApiClient('users')
+    userState.value = await apiClient.get('me')
   }
 
-  return { authState, accessToken, refreshToken, setAuthState, isAuthenticated }
-})
+  async function login(username: string, password: string) {
+    const res = await fetch('/api/token/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username,
+        password
+      })
+    })
+
+    if (!res.ok) {
+      throw new Error('Login failed')
+    }
+
+    authState.value = await res.json()
+    await fetchUser()
+  }
+
+  function logout() {
+    authState.value = userState.value = undefined
+  }
+
+  return { authState, userState, accessToken, refreshToken, isAuthenticated, user, fetchUser, login, logout }
+}, { persist: true })
 
 interface AuthState {
-  accessToken: string | null,
-  refreshToken: string | null,
+  access: string
+  refresh: string
+}
+
+interface UserState {
+  username: string
 }
