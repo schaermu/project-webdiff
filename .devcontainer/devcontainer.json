@@ -32,6 +32,6 @@
 	"forwardPorts": [
 		8000
 	],
-	"postCreateCommand": "python3 -m venv .venv && . .venv/bin/activate && pip install -r requirements/dev.txt ",
+	"postCreateCommand": "python3 -m venv .venv && . .venv/bin/activate && pip install -r requirements-dev.txt ",
 	"postAttachCommand": ". .venv/bin/activate"
 }
