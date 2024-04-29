@@ -13,7 +13,7 @@
                 </div>
             </Form>
         </div>
-        <div class="w-9/12 mx-auto mt-10">
+        <div class="w-10/12 mx-auto mt-10">
             <div class="overflow-x-auto">
                 <table class="table table-zebra">
                     <thead>
