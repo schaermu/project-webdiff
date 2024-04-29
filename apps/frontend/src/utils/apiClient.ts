@@ -7,15 +7,25 @@ class ApiClient {
         this._baseUrl += `/${base}`
     }
 
-    _fetch(url: string | undefined, method: string, data?: any) {
+    _fetch(url: string | undefined, method: string, data?: any, retryCount = 0) {
+        const authStore = useAuthStore();
         const headers = {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${useAuthStore().accessToken}`
+            'Authorization': `Bearer ${authStore.accessToken}`
         };
 
         const body = data ? JSON.stringify(data) : undefined;
 
-        return fetch(`${this._baseUrl}/${url ?? ''}`, { method, headers, body });
+        return fetch(`${this._baseUrl}/${url ?? ''}/`, { method, headers, body }).then(async res => {
+            if (res.status === 401 && retryCount === 0) {
+                await useAuthStore().refresh();
+                return this._fetch(url, method, data, 1);
+            } else if (retryCount > 0) {
+                throw new Error('Unauthorized request');
+            }
+
+            return res;
+        });
     }
 
     async get(id: string = '') {
