@@ -1,4 +1,5 @@
 import { useAuthStore } from "@/stores/auth";
+import { useRouter } from "vue-router";
 
 class ApiClient {
     _baseUrl = '/api'
@@ -17,11 +18,13 @@ class ApiClient {
         const body = data ? JSON.stringify(data) : undefined;
 
         return fetch(`${this._baseUrl}/${url ?? ''}/`, { method, headers, body }).then(async res => {
+            // if the request fails with a 401, refresh token and try again
             if (res.status === 401 && retryCount === 0) {
                 await useAuthStore().refresh();
                 return this._fetch(url, method, data, 1);
             } else if (retryCount > 0) {
-                throw new Error('Unauthorized request');
+                // if refreshing the token fails, redirect to login
+                return useRouter().push('/login');
             }
 
             return res;
