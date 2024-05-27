@@ -36,11 +36,38 @@ export const useAuthStore = defineStore('auth', () => {
     await fetchUser()
   }
 
+  async function refresh() {
+    const refreshToken = authState.value?.refresh
+    if (!refreshToken) {
+      throw new Error('No refresh token')
+    }
+
+    const res = await fetch('/api/token/refresh/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        refresh: refreshToken
+      })
+    })
+
+    if (!res.ok) {
+      throw new Error('Refresh token failed')
+    }
+
+    const jsonRes = await res.json()
+    authState.value = {
+      access: jsonRes.access,
+      refresh: refreshToken
+    }
+  }
+
   function logout() {
     authState.value = userState.value = undefined
   }
 
-  return { authState, userState, accessToken, refreshToken, isAuthenticated, user, fetchUser, login, logout }
+  return { authState, userState, accessToken, refreshToken, isAuthenticated, user, fetchUser, login, logout, refresh }
 }, { persist: true })
 
 interface AuthState {

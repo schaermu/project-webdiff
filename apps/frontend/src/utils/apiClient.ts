@@ -1,4 +1,7 @@
 import { useAuthStore } from "@/stores/auth";
+import { useRouter } from "vue-router";
+
+const MAX_RETRY_COUNT = 1;
 
 class ApiClient {
     _baseUrl = '/api'
@@ -7,19 +10,38 @@ class ApiClient {
         this._baseUrl += `/${base}`
     }
 
-    _fetch(url: string, method: string, data?: any) {
+    _fetch(url: string | undefined, method: string, data?: any, retryCount = 0) {
+        const authStore = useAuthStore();
         const headers = {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${useAuthStore().accessToken}`
+            'Authorization': `Bearer ${authStore.accessToken}`
         };
 
         const body = data ? JSON.stringify(data) : undefined;
 
-        return fetch(`${this._baseUrl}/${url}`, { method, headers, body });
+        return fetch(`${this._baseUrl}/${url ?? ''}/`, { method, headers, body }).then(async res => {
+            // if the request fails with a 401, refresh token and try again
+            if (res.status === 401 && retryCount === 0) {
+                try {
+                    await useAuthStore().refresh();
+                    return this._fetch(url, method, data, 1);
+                } catch (e) {
+                    // if refreshing the token fails, redirect to login
+                    useAuthStore().logout();
+                    return useRouter().push('/login');
+                }
+            } else if (retryCount >= MAX_RETRY_COUNT) {
+                // to prevent infinite fetch loop, log out after MAX_RETRY_COUNT
+                useAuthStore().logout();
+                return useRouter().push('/login');
+            }
+
+            return res;
+        });
     }
 
-    async get(url: string) {
-        const res = await this._fetch(url, 'GET')
+    async get(id: string = '') {
+        const res = await this._fetch(id, 'GET')
 
         if (!res.ok) {
             throw new Error('Request failed');
@@ -28,8 +50,8 @@ class ApiClient {
         return await res.json();
     }
 
-    async post(url: string, data: any) {
-        const res = await this._fetch(url, 'POST', data);
+    async post(data: any) {
+        const res = await this._fetch(undefined, 'POST', data);
 
         if (!res.ok) {
             throw new Error('Request failed');

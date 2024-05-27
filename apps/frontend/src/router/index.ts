@@ -18,10 +18,20 @@ const router = createRouter({
     },
     {
       path: '/watches',
-      name: 'watches',
-      component: () => import('@/views/WatchesView.vue'),
       meta: { requiresAuth: true },
-      children: [],
+      children: [
+        {
+          path: '',
+          name: 'watch-list',
+          component: () => import('@/views/WatchesView.vue'),
+        },
+        {
+          path: ':id',
+          name: 'watch-details',
+          props: true,
+          component: () => import('@/views/WatchDetails.vue'),
+        },
+      ],
     }
   ]
 })

@@ -3,8 +3,8 @@
     <div class="mt-10 mx-auto sm:w-full sm:max-w-sm">
         <h1>Login</h1>
         <Form @submit="onSubmit" :validation-schema="schema">
-            <TwInput name="username" label="Username" :inline="true" />
-            <TwInput name="password" label="Password" type="password" :inline="true" />
+            <TwInput class="my-5" name="username" label="Username" :inline="true" />
+            <TwInput class="my-5" name="password" label="Password" type="password" :inline="true" />
             <button :disabled="isSubmitting" type="submit" class="btn btn-primary btn-block">
                 <span v-if="isSubmitting" class="loading loading-spinner"></span>
                 Login

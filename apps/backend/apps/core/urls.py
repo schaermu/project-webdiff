@@ -5,7 +5,7 @@ from rest_framework import routers
 from . import views
 
 urlpatterns = [
-    path("users/me", views.Me.as_view()),
+    path("users/me/", views.Me.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
