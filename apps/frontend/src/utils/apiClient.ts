@@ -1,6 +1,8 @@
 import { useAuthStore } from "@/stores/auth";
 import { useRouter } from "vue-router";
 
+const MAX_RETRY_COUNT = 1;
+
 class ApiClient {
     _baseUrl = '/api'
 
@@ -20,10 +22,17 @@ class ApiClient {
         return fetch(`${this._baseUrl}/${url ?? ''}/`, { method, headers, body }).then(async res => {
             // if the request fails with a 401, refresh token and try again
             if (res.status === 401 && retryCount === 0) {
-                await useAuthStore().refresh();
-                return this._fetch(url, method, data, 1);
-            } else if (retryCount > 0) {
-                // if refreshing the token fails, redirect to login
+                try {
+                    await useAuthStore().refresh();
+                    return this._fetch(url, method, data, 1);
+                } catch (e) {
+                    // if refreshing the token fails, redirect to login
+                    useAuthStore().logout();
+                    return useRouter().push('/login');
+                }
+            } else if (retryCount >= MAX_RETRY_COUNT) {
+                // to prevent infinite fetch loop, log out after MAX_RETRY_COUNT
+                useAuthStore().logout();
                 return useRouter().push('/login');
             }
 
