@@ -1,6 +1,6 @@
 import ApiClient from "@/utils/apiClient";
 
-const client = new ApiClient('user')
+const client = new ApiClient('user', true)
 
 export default {
     async fetchAll() {

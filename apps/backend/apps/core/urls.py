@@ -6,6 +6,7 @@ from . import views
 
 urlpatterns = [
     path("users/me/", views.Me.as_view()),
+    path("users/register/", views.RegisterView.as_view(), name="register"),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

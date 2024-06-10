@@ -21,15 +21,16 @@ import { Form } from 'vee-validate'
 import { useRouter } from 'vue-router'
 import * as yup from 'yup'
 
-import UsersApi from '@/services/users'
+import { useAuthStore } from '@/stores/auth'
 import TwInput from '@/components/forms/TwInput.vue'
 
 const router = useRouter()
+const authStore = useAuthStore()
 
 const schema = yup.object({
     username: yup.string().required('Username is required'),
     email: yup.string().required('E-Mail Address is required').email('Valid E-Mail Address is required'),
-    password: yup.string().required('Password is required').min(6, 'Password must be at least 6 characters'),
+    password: yup.string().required('Password is required').min(8, 'Password must be at least 8 characters'),
     passwordRepeat: yup.string().required().oneOf([yup.ref('password')], 'Passwords must match')
 })
 
@@ -41,11 +42,15 @@ function resetForm() {
 
 function onSubmit(values, actions) {
     isSubmitting.value = true
-    UsersApi.create(values.username, values.password).then(() => {
-        router.push({ name: 'login' })
-        resetForm()
-    }).catch(() => {
-        // handle registration errors
+    authStore.register(values.username, values.email, values.password, values.passwordRepeat).then((result) => {
+        if (result.ok) {
+            resetForm()
+            return router.push({ name: 'login' })
+        } else {
+            actions.setErrors(result.errors)
+        }
+    }).catch((e) => {
+        console.error(e)
     }).finally(() => {
         isSubmitting.value = false
     })
