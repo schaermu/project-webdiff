@@ -12,8 +12,8 @@ dependencies:
     specifier: ^4.12.6
     version: 4.13.1(vue@3.4.30)
   '@vueuse/core':
-    specifier: ^10.9.0
-    version: 10.10.0(vue@3.4.30)
+    specifier: ^10.11.0
+    version: 10.11.0(vue@3.4.30)
   autoprefixer:
     specifier: ^10.4.19
     version: 10.4.19(postcss@8.4.38)
@@ -1075,12 +1075,37 @@ packages:
       - vue
     dev: false
 
+  /@vueuse/core@10.11.0(vue@3.4.30):
+    resolution: {integrity: sha512-x3sD4Mkm7PJ+pcq3HX8PLPBadXCAlSDR/waK87dz0gQE+qJnaaFhc/dZVfJz+IUYzTMVGum2QlR7ImiJQN4s6g==}
+    dependencies:
+      '@types/web-bluetooth': 0.0.20
+      '@vueuse/metadata': 10.11.0
+      '@vueuse/shared': 10.11.0(vue@3.4.30)
+      vue-demi: 0.14.8(vue@3.4.30)
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
+    dev: false
+
   /@vueuse/metadata@10.10.0:
     resolution: {integrity: sha512-UNAo2sTCAW5ge6OErPEHb5z7NEAg3XcO9Cj7OK45aZXfLLH1QkexDcZD77HBi5zvEiLOm1An+p/4b5K3Worpug==}
     dev: false
 
+  /@vueuse/metadata@10.11.0:
+    resolution: {integrity: sha512-kQX7l6l8dVWNqlqyN3ePW3KmjCQO3ZMgXuBMddIu83CmucrsBfXlH+JoviYyRBws/yLTQO8g3Pbw+bdIoVm4oQ==}
+    dev: false
+
   /@vueuse/shared@10.10.0(vue@3.4.30):
     resolution: {integrity: sha512-2aW33Ac0Uk0U+9yo3Ypg9s5KcR42cuehRWl7vnUHadQyFvCktseyxxEPBi1Eiq4D2yBGACOnqLZpx1eMc7g5Og==}
+    dependencies:
+      vue-demi: 0.14.8(vue@3.4.30)
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
+    dev: false
+
+  /@vueuse/shared@10.11.0(vue@3.4.30):
+    resolution: {integrity: sha512-fyNoIXEq3PfX1L3NkNhtVQUSRtqYwJtJg+Bp9rIzculIZWHTkKSysujrOk2J+NrRulLTQH9+3gGSfYLWSEWU1A==}
     dependencies:
       vue-demi: 0.14.8(vue@3.4.30)
     transitivePeerDependencies:
