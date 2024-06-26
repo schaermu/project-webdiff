@@ -17,7 +17,7 @@
   "dependencies": {
     "@types/uuid": "^9.0.8",
     "@vee-validate/yup": "^4.12.6",
-    "@vueuse/core": "^10.9.0",
+    "@vueuse/core": "^10.11.0",
     "autoprefixer": "^10.4.19",
     "d": "^1.0.2",
     "flowbite": "^2.3.0",
