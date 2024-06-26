@@ -1,9 +1,39 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.utils import timezone
+
+from apps.backend.common.email import Util
 
 
 class User(AbstractUser):
-    pass
+    is_verified = models.BooleanField(default=False)
+    verification_uuid = models.UUIDField(null=True, blank=True)
+
+    def __str__(self):
+        return self.email
+
+    def verify_email(self, uuid):
+        if self.verification_uuid == uuid:
+            self.verification_uuid = None
+            self.is_verified = True
+            self.save()
+            return True
+        return False
+
+    def generate_verification_uuid(self):
+        from uuid import uuid4
+
+        self.verification_uuid = uuid4()
+        self.save()
+
+    def send_verification_email(self):
+        Util.send_email(
+            {
+                "email_subject": "Verify your email",
+                "email_body": f"Click here to verify your email: http://localhost:8000/api/verify-email/{self.verification_uuid}",
+                "to_email": self.email,
+            }
+        )
 
 
 class TimestampMixin(models.Model):
