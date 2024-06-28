@@ -23,7 +23,7 @@ class User(AbstractUser):
         Util.send_email(
             {
                 "email_subject": "Verify your email",
-                "email_body": f"Click here to verify your email: {settings.BASE_URL}/verify-email/{self.id}?uuid={self.verification_uuid}",
+                "email_body": f"Click here to verify your email: {settings.BASE_URL}/verify-email/{self.verification_uuid}",
                 "to_email": self.email,
             }
         )

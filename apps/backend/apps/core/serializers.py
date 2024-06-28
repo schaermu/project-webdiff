@@ -47,14 +47,13 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
 
 class VerifyEmailSerializer(serializers.Serializer):
-    userId = serializers.IntegerField()
     token = serializers.UUIDField()
 
     class Meta:
-        fields = ["userId", "token"]
+        fields = ["token"]
 
     def validate(self, attrs):
-        user = User.objects.get(id=attrs["userId"])
-        if user.verification_uuid != attrs["token"]:
+        user = User.objects.get(verification_uuid=attrs["token"])
+        if not user:
             raise serializers.ValidationError("Invalid verification token.")
         return attrs

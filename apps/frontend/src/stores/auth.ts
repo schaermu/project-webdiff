@@ -26,18 +26,17 @@ export const useAuthStore = defineStore('auth', () => {
     })
   }
 
-  async function verifyEmail(userId: string, token: string) {
+  async function verifyEmail(token: string) {
     const apiClient = new ApiClient('users/verify-email', false)
     return await apiClient.post({
-      userId,
       token
     })
   }
 
-  async function resendVerifyEmail(userId: string) {
+  async function resendVerifyEmail(token: string) {
     const apiClient = new ApiClient('users/resend-verification-email', false)
     return await apiClient.post({
-      userId
+      token
     })
   }
 

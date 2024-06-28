@@ -47,7 +47,7 @@ class VerifyEmailView(generics.GenericAPIView):
         data = request.data
         serializer = self.serializer_class(data=data)
         serializer.is_valid(raise_exception=True)
-        user = User.objects.get(id=serializer.validated_data["userId"])
+        user = User.objects.get(verification_uuid=serializer.validated_data["token"])
         user.is_verified = True
         user.verification_uuid = None
         user.save()
@@ -58,7 +58,7 @@ class ResendVerificationEmailView(APIView):
     permission_classes = [permissions.AllowAny]
 
     def post(self, request: Request) -> Response:
-        user = get_object_or_404(User, id=request.data["userId"])
+        user = get_object_or_404(User, verification_uuid=request.data["token"])
         user.generate_verification_uuid()
         user.send_verification_email()
         return Response("Verification email sent", status=status.HTTP_200_OK)

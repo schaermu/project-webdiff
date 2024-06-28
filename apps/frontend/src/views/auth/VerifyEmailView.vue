@@ -33,30 +33,29 @@ const route = useRoute()
 const router = useRouter()
 const authStore = useAuthStore()
 
-const userId = route.params.userId
-const token = route.query.uuid
-
-if (!userId || !token) {
-    router.push({ name: 'login' })
-}
+const token = route.params.token
 
 const successful = ref(false)
 const failed = ref(false)
 const emailResent = ref(false)
 
 onMounted(() => {
-    authStore.verifyEmail(userId, token)
-        .then((res) => {
-            resetFlags()
-            if (res.ok) {
-                successful.value = true
-            } else {
+    if (!token) {
+        router.push({ name: 'login' })
+    } else {
+        authStore.verifyEmail(token)
+            .then((res) => {
+                resetFlags()
+                if (res.ok) {
+                    successful.value = true
+                } else {
+                    failed.value = true
+                }
+            })
+            .catch(() => {
                 failed.value = true
-            }
-        })
-        .catch(() => {
-            failed.value = true
-        })
+            })
+    }
 })
 
 const resetFlags = () => {

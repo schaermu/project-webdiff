@@ -22,7 +22,7 @@ const router = createRouter({
       component: () => import('@/views/auth/RegisterView.vue'),
     },
     {
-      path: '/verify-email/:userId',
+      path: '/verify-email/:token',
       name: 'verify-email',
       component: () => import('@/views/auth/VerifyEmailView.vue'),
     },
