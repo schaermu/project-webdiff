@@ -17,7 +17,6 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent
 sys.path.append(str(BASE_DIR / "apps"))
 
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "django-insecure-=o%f^=e9i*$tp0zc0&c866#=wpjb4q1ojxj=9ulftt6yn(7_qv"
 
@@ -25,6 +24,12 @@ SECRET_KEY = "django-insecure-=o%f^=e9i*$tp0zc0&c866#=wpjb4q1ojxj=9ulftt6yn(7_qv
 DEBUG = True
 ALLOWED_HOSTS = []
 
+# set to frontend application
+BASE_URL = "http://localhost:5173"
+
+# Email settings
+EMAIL_HOST = "maildev"
+EMAIL_PORT = 1025
 
 # Application definition
 INSTALLED_APPS = [

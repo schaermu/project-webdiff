@@ -3,10 +3,10 @@
     <div class="mt-10 mx-auto sm:w-full sm:max-w-sm">
         <h1>Sign Up</h1>
         <Form @submit="onSubmit" :validation-schema="schema">
-            <TwInput class="my-5" name="username" label="Username" />
-            <TwInput class="my-5" name="email" label="E-Mail Address" />
-            <TwInput class="my-5" name="password" label="Password" type="password" />
-            <TwInput class="my-5" name="passwordRepeat" label="Repeat password" type="password" />
+            <Input class="my-5" name="username" label="Username" />
+            <Input class="my-5" name="email" label="E-Mail Address" />
+            <Input class="my-5" name="password" label="Password" type="password" />
+            <Input class="my-5" name="passwordRepeat" label="Repeat password" type="password" />
             <button :disabled="isSubmitting" type="submit" class="btn btn-primary btn-block">
                 <span v-if="isSubmitting" class="loading loading-spinner"></span>
                 Register
@@ -22,7 +22,7 @@ import { useRouter } from 'vue-router'
 import * as yup from 'yup'
 
 import { useAuthStore } from '@/stores/auth'
-import TwInput from '@/components/forms/TwInput.vue'
+import Input from '@/components/forms/Input.vue'
 
 const router = useRouter()
 const authStore = useAuthStore()

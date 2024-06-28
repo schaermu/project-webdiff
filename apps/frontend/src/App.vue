@@ -8,7 +8,7 @@ import NavigationBar from '@/components/shared/NavigationBar.vue';
     <Suspense>
       <NavigationBar />
     </Suspense>
-    <main class="bg-gray-50 dark:bg-gray-900 h-full">
+    <main class="bg-gray-50 dark:bg-gray-900 h-full prose max-w-full">
       <RouterView v-slot="{ Component }">
         <template v-if="Component">
           <Transition mode="out-in">

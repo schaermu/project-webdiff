@@ -26,6 +26,21 @@ export const useAuthStore = defineStore('auth', () => {
     })
   }
 
+  async function verifyEmail(userId: string, token: string) {
+    const apiClient = new ApiClient('users/verify-email', false)
+    return await apiClient.post({
+      userId,
+      token
+    })
+  }
+
+  async function resendVerifyEmail(userId: string) {
+    const apiClient = new ApiClient('users/resend-verification-email', false)
+    return await apiClient.post({
+      userId
+    })
+  }
+
   async function login(username: string, password: string) {
     const apiClient = new ApiClient('token', false)
     const loginRes = await apiClient.post({
@@ -59,7 +74,7 @@ export const useAuthStore = defineStore('auth', () => {
     authState.value = userState.value = undefined
   }
 
-  return { authState, userState, accessToken, refreshToken, isAuthenticated, user, fetchUser, login, register, logout, refresh }
+  return { authState, userState, accessToken, refreshToken, isAuthenticated, user, fetchUser, login, register, verifyEmail, resendVerifyEmail, logout, refresh }
 }, { persist: true })
 
 interface AuthState {
