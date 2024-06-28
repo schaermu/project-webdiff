@@ -42,7 +42,7 @@ function onSubmit(values, actions) {
         router.push({ name: 'home' })
         resetForm()
     }).catch(() => {
-        actions.setFieldError('username', 'Invalid credentials')
+        actions.setFieldError('username', 'Invalid credentials or not verified')
     }).finally(() => {
         isSubmitting.value = false
     })
