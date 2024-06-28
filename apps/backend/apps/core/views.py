@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.shortcuts import get_object_or_404
 from ipware import get_client_ip
 from rest_framework import permissions, generics, status
@@ -71,3 +72,14 @@ class ResendVerificationEmailView(APIView):
         user.generate_verification_uuid()
         user.send_verification_email()
         return Response("Verification email sent", status=status.HTTP_200_OK)
+
+
+class FrontendSettingsView(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def get(self, request: Request) -> Response:
+        return Response(
+            {
+                "turnstile_sitekey": settings.TURNSTILE_SITE_KEY,
+            }
+        )

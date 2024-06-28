@@ -1,6 +1,11 @@
-<script setup lang="ts">
+<script setup>
+import { useSettingsStore } from '@/stores/settings'
 import { RouterView } from 'vue-router'
 import NavigationBar from '@/components/shared/NavigationBar.vue';
+
+// load settings
+const settingsStore = useSettingsStore()
+settingsStore.load()
 </script>
 
 <template>

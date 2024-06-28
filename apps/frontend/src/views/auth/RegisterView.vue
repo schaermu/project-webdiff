@@ -24,10 +24,12 @@ import * as yup from 'yup'
 import VueTurnstile from 'vue-turnstile'
 
 import { useAuthStore } from '@/stores/auth'
+import { useSettingsStore } from '@/stores/settings'
 import Input from '@/components/forms/Input.vue'
 
 const router = useRouter()
 const authStore = useAuthStore()
+const settingsStore = useSettingsStore()
 
 const schema = yup.object({
     username: yup.string().required('Username is required'),

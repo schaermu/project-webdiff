@@ -13,6 +13,7 @@ urlpatterns = [
         views.ResendVerificationEmailView.as_view(),
         name="resend-verification-email",
     ),
+    path("settings/", views.FrontendSettingsView.as_view(), name="settings"),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

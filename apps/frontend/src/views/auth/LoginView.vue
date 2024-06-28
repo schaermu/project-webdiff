@@ -5,7 +5,7 @@
         <Form @submit="onSubmit" :validation-schema="schema">
             <Input class="my-5" name="username" label="Username" :inline="true" />
             <Input class="my-5" name="password" label="Password" type="password" :inline="true" />
-            <VueTurnstile action="login" site-key="1x00000000000000000000AA" v-model="captcha" />
+            <VueTurnstile action="login" v-bind:site-key="settingsStore.turnstileSiteKey" v-model="captcha" />
             <button :disabled="isSubmitting || !captcha" type="submit" class="btn btn-primary btn-block mt-5">
                 <span v-if="isSubmitting" class="loading loading-spinner"></span>
                 Login
@@ -22,10 +22,12 @@ import * as yup from 'yup'
 import VueTurnstile from 'vue-turnstile'
 
 import { useAuthStore } from '@/stores/auth'
+import { useSettingsStore } from '@/stores/settings'
 import Input from '@/components/forms/Input.vue'
 
 const router = useRouter()
 const authStore = useAuthStore()
+const settingsStore = useSettingsStore()
 
 const schema = yup.object({
     username: yup.string().required(),
