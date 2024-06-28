@@ -56,6 +56,9 @@ importers:
       vue-router:
         specifier: ^4.4.0
         version: 4.4.0(vue@3.4.30(typescript@5.4.5))
+      vue-turnstile:
+        specifier: ^1.0.9
+        version: 1.0.9(vue@3.4.30(typescript@5.4.5))
       yup:
         specifier: ^1.4.0
         version: 1.4.0
@@ -2048,6 +2051,11 @@ packages:
     hasBin: true
     peerDependencies:
       typescript: '*'
+
+  vue-turnstile@1.0.9:
+    resolution: {integrity: sha512-3kvvI1EPyzUJGtWTcWmel7B45J/TZb2UCuNZyOrJCG3KCtG+U+cHDKilPyqxsMJfQ9BppBOkh8SEWbUA9yYCIw==}
+    peerDependencies:
+      vue: ^3.2.45
 
   vue@3.4.30:
     resolution: {integrity: sha512-NcxtKCwkdf1zPsr7Y8+QlDBCGqxvjLXF2EX+yi76rV5rrz90Y6gK1cq0olIhdWGgrlhs9ElHuhi9t3+W5sG5Xw==}
@@ -4065,6 +4073,10 @@ snapshots:
       '@vue/language-core': 2.0.21(typescript@5.4.5)
       semver: 7.6.2
       typescript: 5.4.5
+
+  vue-turnstile@1.0.9(vue@3.4.30(typescript@5.4.5)):
+    dependencies:
+      vue: 3.4.30(typescript@5.4.5)
 
   vue@3.4.30(typescript@5.4.5):
     dependencies:

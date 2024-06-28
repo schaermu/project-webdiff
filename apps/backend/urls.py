@@ -1,6 +1,11 @@
 from django.contrib import admin
 from django.urls import path, include
 
+from ipware import get_client_ip
+
+from rest_framework import status
+from rest_framework.request import Request
+from rest_framework.response import Response
 from rest_framework_simplejwt.views import (
     TokenRefreshView,
     TokenVerifyView,
@@ -9,9 +14,17 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView as BaseTokenObtainPairView,
 )
 
+from apps.backend.common.turnstile import TurnstileUtils
+
 
 class TokenObtainPairView(BaseTokenObtainPairView):
-    pass
+    def post(self, request: Request, *args, **kwargs) -> Response:
+        ip, _ = get_client_ip(request)
+        if "captcha" in request.data and TurnstileUtils.verify_captcha(
+            request.data["captcha"], ip
+        ):
+            return super().post(request, *args, **kwargs)
+        return Response("Invalid captcha", status=status.HTTP_400_BAD_REQUEST)
 
 
 urlpatterns = [

@@ -40,11 +40,12 @@ export const useAuthStore = defineStore('auth', () => {
     })
   }
 
-  async function login(username: string, password: string) {
+  async function login(username: string, password: string, captcha: string) {
     const apiClient = new ApiClient('token', false)
     const loginRes = await apiClient.post({
       username,
-      password
+      password,
+      captcha
     })
 
     authState.value = loginRes.data
