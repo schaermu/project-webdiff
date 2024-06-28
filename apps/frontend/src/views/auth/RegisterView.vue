@@ -7,7 +7,8 @@
             <Input class="my-5" name="email" label="E-Mail Address" />
             <Input class="my-5" name="password" label="Password" type="password" />
             <Input class="my-5" name="passwordRepeat" label="Repeat password" type="password" />
-            <button :disabled="isSubmitting" type="submit" class="btn btn-primary btn-block">
+            <VueTurnstile action="login" site-key="1x00000000000000000000AA" v-model="captcha" />
+            <button :disabled="isSubmitting" type="submit" class="btn btn-primary btn-block mt-5">
                 <span v-if="isSubmitting" class="loading loading-spinner"></span>
                 Register
             </button>
@@ -20,6 +21,7 @@ import { ref } from 'vue'
 import { Form } from 'vee-validate'
 import { useRouter } from 'vue-router'
 import * as yup from 'yup'
+import VueTurnstile from 'vue-turnstile'
 
 import { useAuthStore } from '@/stores/auth'
 import Input from '@/components/forms/Input.vue'
@@ -35,6 +37,7 @@ const schema = yup.object({
 })
 
 const isSubmitting = ref(false)
+const captcha = ref('')
 
 function resetForm() {
     document.querySelector('form').reset()
@@ -42,7 +45,7 @@ function resetForm() {
 
 function onSubmit(values, actions) {
     isSubmitting.value = true
-    authStore.register(values.username, values.email, values.password, values.passwordRepeat).then((result) => {
+    authStore.register(values.username, values.email, values.password, values.passwordRepeat, captcha.value).then((result) => {
         if (result.ok) {
             resetForm()
             return router.push({ name: 'login' })

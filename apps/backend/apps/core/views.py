@@ -1,9 +1,12 @@
 from django.shortcuts import get_object_or_404
+from ipware import get_client_ip
 from rest_framework import permissions, generics, status
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.request import Request
+
+from apps.backend.common.turnstile import TurnstileUtils
 
 from .serializers import UserSerializer, RegistrationSerializer, VerifyEmailSerializer
 from .models import User
@@ -31,6 +34,12 @@ class RegisterView(generics.CreateAPIView):
 
     def post(self, request: Request) -> Response:
         data = request.data
+        ip, _ = get_client_ip(request)
+        if "captcha" not in data or not TurnstileUtils.verify_captcha(
+            data["captcha"], ip
+        ):
+            return Response("Invalid captcha", status=status.HTTP_400_BAD_REQUEST)
+
         serializer = self.serializer_class(data=data)
         serializer.is_valid(raise_exception=True)
         serializer.save()

@@ -16,13 +16,14 @@ export const useAuthStore = defineStore('auth', () => {
     userState.value = (await apiClient.get('me')).data
   }
 
-  async function register(username: string, email: string, password: string, password2: string) {
+  async function register(username: string, email: string, password: string, password2: string, captcha: string) {
     const apiClient = new ApiClient('users/register', false)
     return await apiClient.post({
       username,
       email,
       password,
-      password2
+      password2,
+      captcha
     })
   }
 
