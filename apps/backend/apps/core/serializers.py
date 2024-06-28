@@ -40,4 +40,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
         user.set_password(validated_data["password"])
         user.save()
 
+        user.generate_verification_uuid()
+        user.send_verification_email()
+
         return user
