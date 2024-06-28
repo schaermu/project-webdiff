@@ -22,5 +22,13 @@ services:
       - POSTGRES_USER=webdiff
       - POSTGRES_PASSWORD=webdiff
 
+  maildev:
+    image: maildev/maildev
+    ports:
+      - "1080:1080"
+      - "1025:1025"
+    environment:
+      MAILDEV_IP: "::"
+
 volumes:
   pgdata:

@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 import daisyui from 'daisyui'
+import typography from '@tailwindcss/typography'
 
 export default {
   content: [
@@ -7,10 +8,9 @@ export default {
     "./src/**/*.{vue,js,ts,jsx,tsx}"
   ],
   darkMode: "class",
-  plugins: [daisyui],
+  plugins: [typography, daisyui],
   daisyui: {
     themes: ["bumblebee", "sunset"],
     darkTheme: "sunset"
   }
 }
-

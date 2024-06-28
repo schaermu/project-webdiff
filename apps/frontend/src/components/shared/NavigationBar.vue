@@ -23,6 +23,7 @@
     </div>
     <div class="navbar-end">
       <RouterLink class="btn btn-ghost" v-if="!authStore.isAuthenticated" to="/">Login</RouterLink>
+      <RouterLink class="btn btn-primary" v-if="!authStore.isAuthenticated" to="/sign-up">Sign Up</RouterLink>
       <div class="dropdown dropdown-end" v-if="authStore.isAuthenticated">
         <div tabindex="0" role="button" class="btn btn-ghost">
           Hello {{ authStore.user?.username }}

@@ -3,9 +3,10 @@
     <div class="mt-10 mx-auto sm:w-full sm:max-w-sm">
         <h1>Login</h1>
         <Form @submit="onSubmit" :validation-schema="schema">
-            <TwInput class="my-5" name="username" label="Username" :inline="true" />
-            <TwInput class="my-5" name="password" label="Password" type="password" :inline="true" />
-            <button :disabled="isSubmitting" type="submit" class="btn btn-primary btn-block">
+            <Input class="my-5" name="username" label="Username" :inline="true" />
+            <Input class="my-5" name="password" label="Password" type="password" :inline="true" />
+            <VueTurnstile action="login" v-bind:site-key="settingsStore.turnstileSiteKey" v-model="captcha" />
+            <button :disabled="isSubmitting || !captcha" type="submit" class="btn btn-primary btn-block mt-5">
                 <span v-if="isSubmitting" class="loading loading-spinner"></span>
                 Login
             </button>
@@ -18,12 +19,15 @@ import { ref } from 'vue'
 import { Form } from 'vee-validate'
 import { useRouter } from 'vue-router'
 import * as yup from 'yup'
+import VueTurnstile from 'vue-turnstile'
 
 import { useAuthStore } from '@/stores/auth'
-import TwInput from '@/components/forms/TwInput.vue'
+import { useSettingsStore } from '@/stores/settings'
+import Input from '@/components/forms/Input.vue'
 
 const router = useRouter()
 const authStore = useAuthStore()
+const settingsStore = useSettingsStore()
 
 const schema = yup.object({
     username: yup.string().required(),
@@ -31,6 +35,7 @@ const schema = yup.object({
 })
 
 const isSubmitting = ref(false)
+const captcha = ref('')
 
 function resetForm() {
     document.querySelector('form').reset()
@@ -38,11 +43,11 @@ function resetForm() {
 
 function onSubmit(values, actions) {
     isSubmitting.value = true
-    authStore.login(values.username, values.password).then(() => {
+    authStore.login(values.username, values.password, captcha.value).then(() => {
         router.push({ name: 'home' })
         resetForm()
     }).catch(() => {
-        actions.setFieldError('username', 'Invalid credentials')
+        actions.setFieldError('username', 'Invalid credentials or not verified')
     }).finally(() => {
         isSubmitting.value = false
     })

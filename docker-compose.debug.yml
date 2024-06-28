@@ -17,6 +17,7 @@ services:
       - 5678:5678
     depends_on:
       - postgresdb
+
   postgresdb:
     image: postgres
     volumes:

@@ -15,6 +15,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@tailwindcss/typography": "^0.5.13",
     "@types/uuid": "^9.0.8",
     "@vee-validate/yup": "^4.12.6",
     "@vueuse/core": "^10.11.0",
@@ -30,6 +31,7 @@
     "vee-validate": "^4.12.6",
     "vue": "^3.4.30",
     "vue-router": "^4.4.0",
+    "vue-turnstile": "^1.0.9",
     "yup": "^1.4.0"
   },
   "devDependencies": {

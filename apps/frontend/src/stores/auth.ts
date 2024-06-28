@@ -13,26 +13,43 @@ export const useAuthStore = defineStore('auth', () => {
 
   async function fetchUser() {
     const apiClient = new ApiClient('users')
-    userState.value = await apiClient.get('me')
+    userState.value = (await apiClient.get('me')).data
   }
 
-  async function login(username: string, password: string) {
-    const res = await fetch('/api/token/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        username,
-        password
-      })
+  async function register(username: string, email: string, password: string, password2: string, captcha: string) {
+    const apiClient = new ApiClient('users/register', false)
+    return await apiClient.post({
+      username,
+      email,
+      password,
+      password2,
+      captcha
+    })
+  }
+
+  async function verifyEmail(token: string) {
+    const apiClient = new ApiClient('users/verify-email', false)
+    return await apiClient.post({
+      token
+    })
+  }
+
+  async function resendVerifyEmail(token: string) {
+    const apiClient = new ApiClient('users/resend-verification-email', false)
+    return await apiClient.post({
+      token
+    })
+  }
+
+  async function login(username: string, password: string, captcha: string) {
+    const apiClient = new ApiClient('token', false)
+    const loginRes = await apiClient.post({
+      username,
+      password,
+      captcha
     })
 
-    if (!res.ok) {
-      throw new Error('Login failed')
-    }
-
-    authState.value = await res.json()
+    authState.value = loginRes.data
     await fetchUser()
   }
 
@@ -42,21 +59,12 @@ export const useAuthStore = defineStore('auth', () => {
       throw new Error('No refresh token')
     }
 
-    const res = await fetch('/api/token/refresh/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        refresh: refreshToken
-      })
-    })
+    const apiClient = new ApiClient('token/refresh', false)
+    const res = await apiClient.post({
+      refresh: refreshToken
+    });
 
-    if (!res.ok) {
-      throw new Error('Refresh token failed')
-    }
-
-    const jsonRes = await res.json()
+    const jsonRes = res.data
     authState.value = {
       access: jsonRes.access,
       refresh: refreshToken
@@ -67,7 +75,7 @@ export const useAuthStore = defineStore('auth', () => {
     authState.value = userState.value = undefined
   }
 
-  return { authState, userState, accessToken, refreshToken, isAuthenticated, user, fetchUser, login, logout, refresh }
+  return { authState, userState, accessToken, refreshToken, isAuthenticated, user, fetchUser, login, register, verifyEmail, resendVerifyEmail, logout, refresh }
 }, { persist: true })
 
 interface AuthState {

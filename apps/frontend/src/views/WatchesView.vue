@@ -4,7 +4,7 @@
             <h1>Create new watch</h1>
             <Form @submit="onSubmit" :validation-schema="schema">
                 <div class="flex gap-2">
-                    <TwInput class="flex-auto" name="url" label="URL" :inline="true" inputClass="input-lg"
+                    <Input class="flex-auto" name="url" label="URL" :inline="true" inputClass="input-lg"
                         labelClass="input-lg" />
                     <button type="submit" class="btn btn-lg btn-primary">
                         <span v-if="isSubmitting" class="loading loading-spinner"></span>
@@ -52,7 +52,7 @@ import { Form } from 'vee-validate'
 import * as yup from 'yup'
 import { useRouter } from 'vue-router'
 
-import TwInput from '@/components/forms/TwInput.vue'
+import Input from '@/components/forms/Input.vue'
 import WatchesApi from '@/services/watches'
 
 const schema = yup.object({
