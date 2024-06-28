@@ -1,5 +1,5 @@
 import { useAuthStore } from "@/stores/auth";
-import { useRouter, isNavigationFailure } from "vue-router";
+import { useRouter } from "vue-router";
 
 const MAX_RETRY_COUNT = 1;
 

@@ -16,7 +16,5 @@ class TurnstileUtils:
 
         if response.status_code == 200:
             json = response.json()
-            if json["success"]:
-                return True
-            else:
-                return False
+            return json["success"]
+        return False
