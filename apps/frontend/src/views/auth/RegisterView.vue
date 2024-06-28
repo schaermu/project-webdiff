@@ -7,7 +7,7 @@
             <Input class="my-5" name="email" label="E-Mail Address" />
             <Input class="my-5" name="password" label="Password" type="password" />
             <Input class="my-5" name="passwordRepeat" label="Repeat password" type="password" />
-            <VueTurnstile action="login" site-key="1x00000000000000000000AA" v-model="captcha" />
+            <VueTurnstile action="login" v-bind:site-key="settingsStore.turnstileSiteKey" v-model="captcha" />
             <button :disabled="isSubmitting" type="submit" class="btn btn-primary btn-block mt-5">
                 <span v-if="isSubmitting" class="loading loading-spinner"></span>
                 Register
