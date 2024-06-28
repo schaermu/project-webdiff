@@ -1,10 +1,17 @@
 from django.contrib import admin
 from django.urls import path, include
+
 from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
     TokenRefreshView,
     TokenVerifyView,
 )
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView as BaseTokenObtainPairView,
+)
+
+
+class TokenObtainPairView(BaseTokenObtainPairView):
+    pass
 
 
 urlpatterns = [

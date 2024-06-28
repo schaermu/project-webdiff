@@ -3,7 +3,7 @@ from django.db import models
 from django.utils import timezone
 from django.conf import settings
 
-from apps.backend.common.email import Util
+from apps.backend.common.email import EmailUtil
 
 
 class User(AbstractUser):
@@ -20,7 +20,7 @@ class User(AbstractUser):
         self.save()
 
     def send_verification_email(self):
-        Util.send_email(
+        EmailUtil.send_email(
             {
                 "email_subject": "Verify your email",
                 "email_body": f"Click here to verify your email: {settings.BASE_URL}/verify-email/{self.verification_uuid}",

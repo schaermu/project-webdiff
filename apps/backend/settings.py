@@ -11,14 +11,19 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 import sys
+import os
 from pathlib import Path
+
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent
 sys.path.append(str(BASE_DIR / "apps"))
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-=o%f^=e9i*$tp0zc0&c866#=wpjb4q1ojxj=9ulftt6yn(7_qv"
+SECRET_KEY = str(os.getenv("SECRET_KEY"))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -26,6 +31,10 @@ ALLOWED_HOSTS = []
 
 # set to frontend application
 BASE_URL = "http://localhost:5173"
+
+# Turnstile config
+TURNSTILE_SITE_KEY = str(os.getenv("TURNSTILE_SITE_KEY"))
+TURNSTILE_SECRET_KEY = str(os.getenv("TURNSTILE_SECRET_KEY"))
 
 # Email settings
 EMAIL_HOST = "maildev"
