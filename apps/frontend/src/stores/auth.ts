@@ -16,10 +16,9 @@ export const useAuthStore = defineStore('auth', () => {
     userState.value = (await apiClient.get('me')).data
   }
 
-  async function register(username: string, email: string, password: string, password2: string, captcha: string) {
+  async function register(email: string, password: string, password2: string, captcha: string) {
     const apiClient = new ApiClient('users/register', false)
     return await apiClient.post({
-      username,
       email,
       password,
       password2,
@@ -41,10 +40,10 @@ export const useAuthStore = defineStore('auth', () => {
     })
   }
 
-  async function login(username: string, password: string, captcha: string) {
+  async function login(email: string, password: string, captcha: string) {
     const apiClient = new ApiClient('token', false)
     const loginRes = await apiClient.post({
-      username,
+      email,
       password,
       captcha
     })
@@ -84,5 +83,5 @@ interface AuthState {
 }
 
 interface UserState {
-  username: string
+  firstname: string
 }

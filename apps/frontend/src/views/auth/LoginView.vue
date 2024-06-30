@@ -3,7 +3,7 @@
     <div class="mt-10 mx-auto sm:w-full sm:max-w-sm">
         <h1>Login</h1>
         <Form @submit="onSubmit" :validation-schema="schema">
-            <Input class="my-5" name="username" label="Username" :inline="true" />
+            <Input class="my-5" name="email" label="E-Mail" :inline="true" />
             <Input class="my-5" name="password" label="Password" type="password" :inline="true" />
             <VueTurnstile action="login" v-bind:site-key="settingsStore.turnstileSiteKey" v-model="captcha" />
             <button :disabled="isSubmitting || !captcha" type="submit" class="btn btn-primary btn-block mt-5">
@@ -30,7 +30,7 @@ const authStore = useAuthStore()
 const settingsStore = useSettingsStore()
 
 const schema = yup.object({
-    username: yup.string().required(),
+    email: yup.string().email().required(),
     password: yup.string().required()
 })
 
@@ -43,11 +43,11 @@ function resetForm() {
 
 function onSubmit(values, actions) {
     isSubmitting.value = true
-    authStore.login(values.username, values.password, captcha.value).then(() => {
+    authStore.login(values.email, values.password, captcha.value).then(() => {
         router.push({ name: 'home' })
         resetForm()
     }).catch(() => {
-        actions.setFieldError('username', 'Invalid credentials or not verified')
+        actions.setFieldError('email', 'Invalid credentials or not verified')
     }).finally(() => {
         isSubmitting.value = false
     })

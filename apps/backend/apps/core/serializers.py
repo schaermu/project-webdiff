@@ -8,7 +8,7 @@ from .models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["id", "username", "email", "groups"]
+        fields = ["id", "email", "groups"]
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
@@ -23,7 +23,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ["username", "email", "password", "password2"]
+        fields = ["email", "password", "password2"]
 
     def validate(self, attrs):
         if attrs["password"] != attrs["password2"]:
@@ -33,9 +33,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
         return attrs
 
     def create(self, validated_data):
-        user = User.objects.create(
-            username=validated_data["username"], email=validated_data["email"]
-        )
+        user = User.objects.create(email=validated_data["email"])
 
         user.set_password(validated_data["password"])
         user.save()
