@@ -26,7 +26,7 @@
       <RouterLink class="btn btn-primary" v-if="!authStore.isAuthenticated" to="/sign-up">Sign Up</RouterLink>
       <div class="dropdown dropdown-end" v-if="authStore.isAuthenticated">
         <div tabindex="0" role="button" class="btn btn-ghost">
-          Hello {{ authStore.user?.username }}
+          Hello {{ authStore.user?.firstName }}
         </div>
         <ul tabindex="0" class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box">
           <li><a>Profile</a></li>

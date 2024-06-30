@@ -8,11 +8,11 @@ class CustomModelBackend(ModelBackend):
     def authenticate(
         self,
         request: HttpRequest,
-        username: str = None,
+        email: str = None,
         password: str = None,
         **kwargs: Any
     ) -> AbstractBaseUser:
-        user = super().authenticate(request, username, password, **kwargs)
+        user = super().authenticate(request, email, password, **kwargs)
         if user and not user.is_verified and not user.is_superuser:
             return None
         return user
