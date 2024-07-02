@@ -6,7 +6,24 @@ on:
   pull_request: {}
 
 jobs:
-  python:
+  frontend:
+    runs-on: ubuntu-22.04
+    container:
+      image: cypress/included:latest
+      options: --user 1001
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          browser: chrome
+          component: true
+        env:
+          CYPRESS_INSTALL_BINARY: 0
+
+  backend:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
