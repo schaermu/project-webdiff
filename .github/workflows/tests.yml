@@ -9,7 +9,9 @@ jobs:
       postgres:
         image: postgres
         env:
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: webdiff
+          POSTGRES_USER: webdiff
+          POSTGRES_PASSWORD: webdiff
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
