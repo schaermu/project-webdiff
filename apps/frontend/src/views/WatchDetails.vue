@@ -2,7 +2,7 @@
     <div class="w-6/12 mx-auto">
         <h1>Edit watch {{ id }}</h1>
         <Form @submit="onSubmit" :validation-schema="schema" :initial-values="watch">
-            <Input name="url" label="URL" :inline="true" v-model="url" />
+            <Input name="url" label="URL" :inline="true" v-model="watch_url" />
             <Input name="name" label="Name" :inline="true" v-model="name" />
             <button type="submit" class="btn btn-primary" :disabled="isSubmitting">
                 Save
@@ -21,7 +21,7 @@ import Input from '@/components/forms/Input.vue'
 import WatchesApi from '@/services/watches'
 
 const schema = yup.object({
-    url: yup.string().required().url(),
+    watch_url: yup.string().required().url(),
 })
 
 const props = defineProps({
