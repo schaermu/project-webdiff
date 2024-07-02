@@ -5,7 +5,9 @@ on:
 jobs:
   python:
     runs-on: ubuntu-latest
-    container: postgres:16
+    services:
+      postgres:
+        image: postgres:16
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
