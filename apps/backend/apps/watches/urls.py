@@ -3,8 +3,10 @@ from rest_framework import routers
 
 from . import views
 
+app_name = "watches"
+
 router = routers.DefaultRouter()
-router.register("watches", views.WatchViewSet)
+router.register("", views.WatchViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),
