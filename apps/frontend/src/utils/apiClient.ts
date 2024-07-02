@@ -7,7 +7,6 @@ class ApiResponse {
     ok: boolean = true
     data?: any
     errors?: Record<string, string[]> = {}
-
 }
 
 class ApiClient {
