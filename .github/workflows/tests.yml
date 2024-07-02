@@ -20,6 +20,7 @@ jobs:
         with:
           browser: chrome
           component: true
+          project: ./apps/frontend
         env:
           CYPRESS_INSTALL_BINARY: 0
 
@@ -85,6 +86,7 @@ jobs:
       if: github.event_name == 'pull_request'
       with:
         recreate: true
+        header: backend-coverage
         path: code-coverage-results.md
 
     - name: Write to Job Summary
