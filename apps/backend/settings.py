@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent
 sys.path.append(str(BASE_DIR / "apps"))
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = str(os.getenv("SECRET_KEY"))
+SECRET_KEY = str(os.getenv("SECRET_KEY", "django-insecure-secret"))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -33,8 +33,10 @@ ALLOWED_HOSTS = []
 BASE_URL = "http://localhost:5173"
 
 # Turnstile config
-TURNSTILE_SITE_KEY = str(os.getenv("TURNSTILE_SITE_KEY"))
-TURNSTILE_SECRET_KEY = str(os.getenv("TURNSTILE_SECRET_KEY"))
+TURNSTILE_SITE_KEY = str(os.getenv("TURNSTILE_SITE_KEY", "1x00000000000000000000AA"))
+TURNSTILE_SECRET_KEY = str(
+    os.getenv("TURNSTILE_SECRET_KEY", "1x0000000000000000000000000000000AA")
+)
 
 # Email settings
 EMAIL_HOST = "maildev"
@@ -95,11 +97,11 @@ WSGI_APPLICATION = "backend.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "webdiff",
-        "USER": "webdiff",
-        "PASSWORD": "webdiff",
-        "HOST": "postgres",
-        "PORT": "5432",
+        "NAME": str(os.getenv("DB_NAME", "webdiff")),
+        "USER": str(os.getenv("DB_USERNAME", "webdiff")),
+        "PASSWORD": str(os.getenv("DB_PASSWORD", "webdiff")),
+        "HOST": str(os.getenv("DB_HOST", "postgres")),
+        "PORT": int(os.getenv("DB_PORT", 5432)),
         "CONN_MAX_AGE": 60,
     }
 }

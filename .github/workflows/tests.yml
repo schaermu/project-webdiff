@@ -5,6 +5,7 @@ on:
 jobs:
   python:
     runs-on: ubuntu-latest
+
     services:
       postgres:
         image: postgres
@@ -19,6 +20,7 @@ jobs:
           --health-retries 5
         ports:
           - 5432:5432
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -35,9 +37,9 @@ jobs:
         pip install -r requirements-dev.txt
   
     - name: Test with pytest
-      run: |
-        pip install pytest pytest-cov
-        pytest --doctest-modules --cov --cov-report=xml
+      run: pytest --doctest-modules --cov --cov-report=xml
+      env:
+        DB_HOST: localhost
     
     - name: Get Coverage report
       uses: orgoro/coverage@v3.1
