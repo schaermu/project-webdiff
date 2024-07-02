@@ -26,6 +26,14 @@ jobs:
           --health-retries 5
         ports:
           - 5432:5432
+        
+      maildev:
+        image: maildev/maildev
+        ports:
+          - 1080:1080
+          - 1025:1025
+        env:
+          MAILDEV_IP: "::"
 
     steps:
     - name: Checkout repository
