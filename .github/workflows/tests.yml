@@ -1,11 +1,9 @@
 name: 'tests'
 on:
-  synchronize:
+  push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
+  pull_request: {}
 
 jobs:
   python:
