@@ -8,12 +8,12 @@ class WatchSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Watch
         fields = [
-            "@self",
+            "url",
             "created_at",
             "modified_at",
             "id",
             "owner",
-            "url",
+            "watch_url",
             "name",
         ]
 
