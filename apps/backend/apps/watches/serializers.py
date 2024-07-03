@@ -3,6 +3,7 @@ from watches.models import Watch
 
 
 class WatchSerializer(serializers.HyperlinkedModelSerializer):
+    url = serializers.HyperlinkedIdentityField(view_name="watches:watch-detail")
     owner = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
     class Meta:
