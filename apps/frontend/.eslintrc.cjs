@@ -1,5 +1,3 @@
-import plugin from '@tailwindcss/typography'
-
 /* eslint-env node */
 require('@rushstack/eslint-patch/modern-module-resolution')
 

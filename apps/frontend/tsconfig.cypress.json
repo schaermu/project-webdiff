@@ -1,8 +1,6 @@
 {
-    "compilerOptions": {
-        "types": [
-            "cypress",
-            "@testing-library/cypress"
-        ]
-    }
+  "compilerOptions": {
+    "types": ["cypress", "mocha"]
+  },
+  "include": ["**/*.*"]
 }

@@ -21,6 +21,8 @@ import './commands'
 
 import { mount } from 'cypress/vue'
 
+import '../../src/assets/main.css';
+
 // Augment the Cypress namespace to include type definitions for
 // your custom command.
 // Alternatively, can be defined in cypress/support/component.d.ts
@@ -32,6 +34,7 @@ declare global {
     }
   }
 }
+
 
 Cypress.Commands.add('mount', mount)
 
