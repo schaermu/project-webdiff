@@ -8,9 +8,6 @@ on:
 jobs:
   frontend:
     runs-on: ubuntu-22.04
-    container:
-      image: cypress/included:latest
-      options: --user 1001
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -24,8 +21,6 @@ jobs:
           browser: chrome
           component: true
           working-directory: apps/frontend
-        env:
-          CYPRESS_INSTALL_BINARY: 0
 
   backend:
     runs-on: ubuntu-latest
