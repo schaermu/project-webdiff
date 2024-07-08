@@ -48,8 +48,8 @@ importers:
         specifier: ^10.0.0
         version: 10.0.0
       vee-validate:
-        specifier: ^4.12.6
-        version: 4.12.8(vue@3.4.31(typescript@5.5.2))
+        specifier: ^4.13.2
+        version: 4.13.2(vue@3.4.31(typescript@5.5.2))
       vue:
         specifier: ^3.4.30
         version: 3.4.31(typescript@5.5.2)
@@ -2527,13 +2527,13 @@ packages:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
     hasBin: true
 
-  vee-validate@4.12.8:
-    resolution: {integrity: sha512-A07rm3+y7SRk0CMD/O4nBT0nxtwjyfzGZwjEUDk18SxK0ZMzd4AFCzzdHlIiCE1QgHetxd0I3kVkZdN0GG0Oww==}
+  vee-validate@4.13.1:
+    resolution: {integrity: sha512-JAlUWTBHg0z66n+v66mrtE9IC1xmVCggzpyc7UXCNkizVok8Zgt1VAVjobSxA/0N19Zn6v6hRfjoYciYH/Z11Q==}
     peerDependencies:
       vue: ^3.4.26
 
-  vee-validate@4.13.1:
-    resolution: {integrity: sha512-JAlUWTBHg0z66n+v66mrtE9IC1xmVCggzpyc7UXCNkizVok8Zgt1VAVjobSxA/0N19Zn6v6hRfjoYciYH/Z11Q==}
+  vee-validate@4.13.2:
+    resolution: {integrity: sha512-HlpR/6MJ92TW9f135umMZKUqdd/tFQTxLNSf2ImbU4Y/MlLVAUpF1l64VdjTOhbClAqPjCb5p/SqHDxLpUHXrw==}
     peerDependencies:
       vue: ^3.4.26
 
@@ -5193,13 +5193,13 @@ snapshots:
 
   uuid@8.3.2: {}
 
-  vee-validate@4.12.8(vue@3.4.31(typescript@5.5.2)):
+  vee-validate@4.13.1(vue@3.4.31(typescript@5.5.2)):
     dependencies:
       '@vue/devtools-api': 6.6.2
       type-fest: 4.18.3
       vue: 3.4.31(typescript@5.5.2)
 
-  vee-validate@4.13.1(vue@3.4.31(typescript@5.5.2)):
+  vee-validate@4.13.2(vue@3.4.31(typescript@5.5.2)):
     dependencies:
       '@vue/devtools-api': 6.6.2
       type-fest: 4.18.3
