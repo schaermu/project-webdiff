@@ -1,6 +1,10 @@
 {
-  "compilerOptions": {
-    "types": ["cypress", "mocha"]
-  },
-  "include": ["**/*.*"]
+    "compilerOptions": {
+        "types": [
+            "cypress"
+        ]
+    },
+    "include": [
+        "**/*.cy.*"
+    ]
 }

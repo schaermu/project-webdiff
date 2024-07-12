@@ -5,6 +5,9 @@
     "src/**/*",
     "src/**/*.vue"
   ],
+  "exclude": [
+    "src/**/*.cy.*"
+  ],
   "compilerOptions": {
     "strict": true,
     "noImplicitAny": false,

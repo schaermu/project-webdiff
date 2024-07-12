@@ -12,6 +12,9 @@
     },
     {
       "path": "./tsconfig.cypress.json"
-    },
-  ]
+    }
+  ],
+  "compilerOptions": {
+    "module": "NodeNext"
+  }
 }
