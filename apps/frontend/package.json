@@ -17,7 +17,7 @@
   "dependencies": {
     "@tailwindcss/typography": "^0.5.13",
     "@types/uuid": "^9.0.8",
-    "@vee-validate/yup": "^4.13.1",
+    "@vee-validate/yup": "^4.13.2",
     "@vueuse/core": "^10.11.0",
     "autoprefixer": "^10.4.19",
     "d": "^1.0.2",
