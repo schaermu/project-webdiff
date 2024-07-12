@@ -6,8 +6,8 @@ updates:
       interval: "daily"
       time: "07:00"
     commit-message:
-      prefix: "fix(deps)"
-      prefix-development: "chore(deps)"
+      prefix: fix
+      prefix-development: chore
       include: scope
     groups:
       dev-dependencies:
@@ -19,8 +19,8 @@ updates:
       interval: "daily"
       time: "07:00"
     commit-message:
-      prefix: "fix(deps)"
-      prefix-development: "chore(deps)"
+      prefix: fix
+      prefix-development: chore
       include: scope
     groups:
       vue:
