@@ -12,8 +12,8 @@ importers:
         specifier: ^0.5.13
         version: 0.5.13(tailwindcss@3.4.3)
       '@vee-validate/yup':
-        specifier: ^4.13.1
-        version: 4.13.1(vue@3.4.31(typescript@5.5.3))
+        specifier: ^4.13.2
+        version: 4.13.2(vue@3.4.31(typescript@5.5.3))
       '@vueuse/core':
         specifier: ^10.11.0
         version: 10.11.0(vue@3.4.31(typescript@5.5.3))
@@ -632,8 +632,11 @@ packages:
     resolution: {integrity: sha512-7syYk4MzjxTEk0g/w3iqtgxnFQspDJfn6QKD36xMuuhTzjcxY7F8EmBLnALjVyaOF1/bVocu3bS/2/F7rXrveQ==}
     engines: {node: ^18.18.0 || >=20.0.0}
 
-  '@vee-validate/yup@4.13.1':
-    resolution: {integrity: sha512-XS057kHcf4uFew708haHVxCjqJ9OYXV57KmOj/R9fnuh76i54F79DCRzm4FDAevOJzkuo7rNBYOSTplY4iXPrQ==}
+  '@ungap/structured-clone@1.2.0':
+    resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
+
+  '@vee-validate/yup@4.13.2':
+    resolution: {integrity: sha512-ai0UL46S3GKO8wxnjTN6ksbxmpRrgOxKZlVO0GVqMAF52ZXW92wcADk5qUtuuW+kWe3cePuK6MH305J+kT9scw==}
 
   '@vitejs/plugin-vue@5.0.5':
     resolution: {integrity: sha512-LOjm7XeIimLBZyzinBQ6OSm3UBCNVCpLkxGC0oWmm2YPzVZoxMsdvNVimLTBzpAnR9hl/yn1SHGuRfe6/Td9rQ==}
@@ -2425,6 +2428,10 @@ packages:
     resolution: {integrity: sha512-Q08/0IrpvM+NMY9PA2rti9Jb+JejTddwmwmVQGskAlhtcrw1wsRzoR6ode6mR+OAabNa75w/dxedSUY2mlphaQ==}
     engines: {node: '>=16'}
 
+  type-fest@4.21.0:
+    resolution: {integrity: sha512-ADn2w7hVPcK6w1I0uWnM//y1rLXZhzB9mr0a3OirzclKF1Wp6VzevUmzz/NRAWunOT6E8HrnpGY7xOfc6K57fA==}
+    engines: {node: '>=16'}
+
   type@2.7.3:
     resolution: {integrity: sha512-8j+1QmAbPvLZow5Qpi6NCaN8FB60p/6x8/vfNqOk/hC+HuvFZhL4+WfekuhQLiqFZXOgQdrs3B+XxEmCc6b3FQ==}
 
@@ -2470,11 +2477,6 @@ packages:
   uuid@8.3.2:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
     hasBin: true
-
-  vee-validate@4.13.1:
-    resolution: {integrity: sha512-JAlUWTBHg0z66n+v66mrtE9IC1xmVCggzpyc7UXCNkizVok8Zgt1VAVjobSxA/0N19Zn6v6hRfjoYciYH/Z11Q==}
-    peerDependencies:
-      vue: ^3.4.26
 
   vee-validate@4.13.2:
     resolution: {integrity: sha512-HlpR/6MJ92TW9f135umMZKUqdd/tFQTxLNSf2ImbU4Y/MlLVAUpF1l64VdjTOhbClAqPjCb5p/SqHDxLpUHXrw==}
@@ -3130,10 +3132,12 @@ snapshots:
       '@typescript-eslint/types': 7.11.0
       eslint-visitor-keys: 3.4.3
 
-  '@vee-validate/yup@4.13.1(vue@3.4.31(typescript@5.5.3))':
+  '@ungap/structured-clone@1.2.0': {}
+
+  '@vee-validate/yup@4.13.2(vue@3.4.31(typescript@5.5.3))':
     dependencies:
-      type-fest: 4.18.3
-      vee-validate: 4.13.1(vue@3.4.31(typescript@5.5.3))
+      type-fest: 4.21.0
+      vee-validate: 4.13.2(vue@3.4.31(typescript@5.5.3))
       yup: 1.4.0
     transitivePeerDependencies:
       - vue
@@ -5021,6 +5025,8 @@ snapshots:
 
   type-fest@4.18.3: {}
 
+  type-fest@4.21.0: {}
+
   type@2.7.3: {}
 
   typescript@5.5.3: {}
@@ -5053,12 +5059,6 @@ snapshots:
   uuid@10.0.0: {}
 
   uuid@8.3.2: {}
-
-  vee-validate@4.13.1(vue@3.4.31(typescript@5.5.3)):
-    dependencies:
-      '@vue/devtools-api': 6.6.2
-      type-fest: 4.18.3
-      vue: 3.4.31(typescript@5.5.3)
 
   vee-validate@4.13.2(vue@3.4.31(typescript@5.5.3)):
     dependencies:
