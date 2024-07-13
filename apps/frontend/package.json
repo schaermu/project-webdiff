@@ -35,6 +35,8 @@
     "yup": "^1.4.0"
   },
   "devDependencies": {
+    "@cypress/code-coverage": "^3.12.41",
+    "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@rushstack/eslint-patch": "^1.10.3",
     "@tsconfig/node20": "^20.1.4",
     "@types/jest": "^29.5.12",
@@ -56,6 +58,7 @@
     "prettier": "^3.3.2",
     "typescript": "~5.5.3",
     "vite": "^5.3.3",
+    "vite-plugin-istanbul": "^6.0.2",
     "vitest": "^2.0.2",
     "vue-tsc": "^2.0.26"
   }
