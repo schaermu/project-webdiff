@@ -1,31 +1,28 @@
-version: '3.4'
 services:
-  webdiff:
-    user: appuser
-
+  app:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
     volumes:
-      - .:/workspace:cached
-      - /var/run/docker.sock:/var/run/docker.sock
+      - ../..:/workspaces:cached
+    command: sleep infinity
+    network_mode: service:db
 
-    # Overrides default command so things don't shut down after the process ends.
-    command: /bin/sh -c "while sleep 1000; do :; done"
-    environment:
-      DISPLAY: ":14"
-      LIBGL_ALWAYS_INDIRECT: 0
-    volumes_from:
-      - x11-bridge:rw
-    depends_on:
-      - x11-bridge
-
-  x11-bridge:
-    image: jare/x11-bridge
+  db:
+    image: postgres:latest
+    restart: unless-stopped
     volumes:
-      - "/tmp/.X11-unix:/tmp/.X11-unix:rw"
-    ports:
-      - "10000:10000"
-    restart: always
+      - postgres-data:/var/lib/postgresql/data
     environment:
-      MODE: tcp
-      XPRA_HTML: "yes"
-      DISPLAY: :14
-      XPRA_PASSWORD: webdiff
+      POSTGRES_USER: webdiff
+      POSTGRES_DB: webdiff
+      POSTGRES_PASSWORD: webdiff
+
+  maildev:
+    image: maildev/maildev
+    environment:
+      MAILDEV_IP: "::"
+    network_mode: service:db
+
+volumes:
+  postgres-data:

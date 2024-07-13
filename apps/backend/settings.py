@@ -39,7 +39,7 @@ TURNSTILE_SECRET_KEY = str(
 )
 
 # Email settings
-EMAIL_HOST = "maildev"
+EMAIL_HOST = "localhost"
 EMAIL_PORT = 1025
 
 # Application definition
@@ -100,7 +100,7 @@ DATABASES = {
         "NAME": str(os.getenv("DB_NAME", "webdiff")),
         "USER": str(os.getenv("DB_USERNAME", "webdiff")),
         "PASSWORD": str(os.getenv("DB_PASSWORD", "webdiff")),
-        "HOST": str(os.getenv("DB_HOST", "postgres")),
+        "HOST": str(os.getenv("DB_HOST", "localhost")),
         "PORT": int(os.getenv("DB_PORT", 5432)),
         "CONN_MAX_AGE": 60,
     }
