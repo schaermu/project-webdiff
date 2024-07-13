@@ -10,7 +10,10 @@ export default defineConfig({
   component: {
     setupNodeEvents(on, config) {
       codeCoverageTask(on, config);
+<<<<<<< Updated upstream
       return config
+=======
+>>>>>>> Stashed changes
     },
     devServer: {
       framework: "vue",
