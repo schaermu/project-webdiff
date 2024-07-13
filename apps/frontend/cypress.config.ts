@@ -1,5 +1,5 @@
 import { defineConfig } from "cypress";
-import codeCoverageTask from "@cypress/code-coverage/task";
+import registerCodeCoverageTasks from "@cypress/code-coverage/task";
 
 export default defineConfig({
   env: {
@@ -9,7 +9,7 @@ export default defineConfig({
   },
   component: {
     setupNodeEvents(on, config) {
-      codeCoverageTask(on, config);
+      registerCodeCoverageTasks(on, config);
       return config
     },
     devServer: {

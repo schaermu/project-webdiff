@@ -18,7 +18,7 @@ export default defineConfig({
     vue(),
     istanbul({
       cypress: true,
-      requireEnv: false,
+      requireEnv: true,
     }),
   ],
   resolve: {

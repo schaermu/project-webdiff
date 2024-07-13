@@ -4,6 +4,7 @@
     "check-coverage": true,
     "include": [
         "src/**/*.ts",
+        "src/**/*.vue",
         "src/**/*.tsx"
     ],
     "exclude": [

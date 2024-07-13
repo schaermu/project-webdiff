@@ -15,11 +15,20 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands'
+import '@cypress/code-coverage/support'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
 import { mount } from 'cypress/vue'
+
+declare global {
+    namespace Cypress {
+        interface Chainable {
+            mount: typeof mount
+        }
+    }
+}
 
 import '../../src/assets/main.css';
 
