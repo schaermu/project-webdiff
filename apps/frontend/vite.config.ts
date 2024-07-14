@@ -12,13 +12,22 @@ export default defineConfig({
     }
   },
   build: {
-    sourcemap: true
+    sourcemap: true,
+    rollupOptions: {
+      output: {
+        manualChunks: () => 'bundle'
+      }
+    },
   },
   plugins: [
     vue(),
     istanbul({
       cypress: true,
       requireEnv: true,
+      include: ['src/*'],
+      exclude: ['node_modules'],
+      extension: ['.js', '.ts', '.vue'],
+      forceBuildInstrument: Boolean(process.env.INSTRUMENT_BUILD)
     }),
   ],
   resolve: {

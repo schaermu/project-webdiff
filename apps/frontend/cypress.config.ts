@@ -12,6 +12,7 @@ export default defineConfig({
       registerCodeCoverageTasks(on, config);
       return config
     },
+    specPattern: 'src/**/*.{cy,spec}.{js,ts,jsx,tsx}',
     devServer: {
       framework: "vue",
       bundler: "vite",

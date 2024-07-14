@@ -35,9 +35,9 @@
 		8000
 	],
 	"portsAttributes": {
-	  "6080": {
-		"label": "desktop"
-	  }
+		"6080": {
+			"label": "desktop"
+		}
 	},
-	"postCreateCommand": "pip install -r requirements-dev.txt"
+	"postCreateCommand": "pip install -r requirements-dev.txt && (cd apps/frontend && pnpm install && npx cypress install)"
 }

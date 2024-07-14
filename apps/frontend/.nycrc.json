@@ -2,6 +2,7 @@
     "all": true,
     "extends": "@istanbuljs/nyc-config-typescript",
     "check-coverage": true,
+    "exclude-after-remap": false,
     "include": [
         "src/**/*.ts",
         "src/**/*.vue",
