@@ -26,8 +26,7 @@ jobs:
       uses: cypress-io/github-action@v6
       with:
         browser: chrome
-        start: pnpm dev
-        command: pnpm test:dev:ci
+        command: pnpm test:ci
         working-directory: apps/frontend
         wait-on: 'http://localhost:4173, http://localhost:8000/api/settings'
         wait-on-timeout: 120
