@@ -21,14 +21,16 @@ jobs:
     - name: Start backend stack
       run: |
         docker compose -f .devcontainer/docker-compose.yml -f docker-compose.ci.yml up -d app db maildev
-        docker compose -f .devcontainer/docker-compose.yml -f docker-compose.ci.yml logs app
 
     - name: Run cypress tests
       uses: cypress-io/github-action@v6
       with:
         browser: chrome
-        command: pnpm test:ci
+        #command: pnpm test:ci
+        component: true
         working-directory: apps/frontend
+        wait-on: 'http://localhost:8000/api/settings'
+        wait-on-timeout: 120
 
   backend:
     runs-on: ubuntu-latest
