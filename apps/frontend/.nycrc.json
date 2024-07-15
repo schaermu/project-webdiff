@@ -1,6 +1,11 @@
 {
     "all": true,
     "check-coverage": true,
+    "reporter": [
+        "cobertura",
+        "lcov",
+        "text-summary"
+    ],
     "include": [
         "src/**/*.js",
         "src/**/*.vue"
