@@ -13,20 +13,15 @@ export default defineConfig({
   },
   build: {
     sourcemap: true,
-    rollupOptions: {
-      output: {
-        manualChunks: () => 'bundle'
-      }
-    },
+    commonjsOptions: { transformMixedEsModules: true }
   },
   plugins: [
     vue(),
     istanbul({
-      cypress: true,
-      requireEnv: true,
-      include: ['src/*'],
+      include: 'src/*',
       exclude: ['node_modules'],
-      extension: ['.js', '.ts', '.vue'],
+      extension: ['.js', '.vue'],
+      requireEnv: false,
       forceBuildInstrument: Boolean(process.env.INSTRUMENT_BUILD)
     }),
   ],

@@ -1,17 +1,12 @@
 {
     "all": true,
-    "extends": "@istanbuljs/nyc-config-typescript",
     "check-coverage": true,
-    "exclude-after-remap": false,
     "include": [
-        "src/**/*.ts",
-        "src/**/*.vue",
-        "src/**/*.tsx"
+        "src/**/*.js",
+        "src/**/*.vue"
     ],
     "exclude": [
         "cypress/**/*.*",
-        "**/*.d.ts",
-        "**/*.cy.tsx",
-        "**/*.cy.ts"
+        "**/*.cy.js"
     ]
 }

@@ -4,7 +4,7 @@ import { computed, ref } from 'vue'
 import ApiClient from '@/utils/apiClient'
 
 export const useSettingsStore = defineStore('settings', () => {
-    const settingsState = ref<Record<string, string>>()
+    const settingsState = ref()
 
     const turnstileSiteKey = computed(() => settingsState.value?.turnstile_sitekey)
 

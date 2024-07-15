@@ -6,13 +6,13 @@ export default {
     async fetchAll() {
         return await client.get(undefined)
     },
-    async create(data: any) {
+    async create(data) {
         return await client.post(data)
     },
-    async update(id: string, data: any) {
+    async update(id, data) {
         return await client.put(id, data)
     },
-    async delete(id: string) {
+    async delete(id) {
         return await client.delete(id)
     }
 }

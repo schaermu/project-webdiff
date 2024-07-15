@@ -4,21 +4,21 @@ import { useRouter } from "vue-router";
 const MAX_RETRY_COUNT = 1;
 
 class ApiResponse {
-    ok: boolean = true
-    data?: any
-    errors?: Record<string, string[]> = {}
+    ok = true
+    data = {}
+    errors = {}
 }
 
 class ApiClient {
     _baseUrl = '/api'
     _requiresAuth = true
 
-    constructor(base: string, requiresAuth = true) {
+    constructor(base, requiresAuth = true) {
         this._baseUrl += `/${base}`
         this._requiresAuth = requiresAuth
     }
 
-    _fetch(url: string | undefined, method: string, data?: any, retryCount = 0): Promise<ApiResponse> {
+    _fetch(url, method, data, retryCount = 0) {
         const fetchProm = this._requiresAuth ? this._authFetch(url, method, data, retryCount) : this._anonFetch(url, method, data);
         return fetchProm.then(async res => {
             const jsonRes = await res.json()
@@ -26,7 +26,7 @@ class ApiClient {
             if (res.status === 400) {
                 return {
                     ok: false,
-                    errors: jsonRes as Record<string, string[]>
+                    errors: jsonRes
                 }
             } else if (!res.ok) {
                 throw new Error(`Request failed: ${res.statusText}`)
@@ -35,7 +35,7 @@ class ApiClient {
         });
     }
 
-    _anonFetch(url: string | undefined, method: string, data?: any): Promise<Response> {
+    _anonFetch(url, method, data) {
         return fetch(`${this._baseUrl}/${url ?? ''}`, {
             method,
             headers: {
@@ -45,7 +45,7 @@ class ApiClient {
         });
     }
 
-    _authFetch(url: string | undefined, method: string, data?: any, retryCount = 0): Promise<Response> {
+    _authFetch(url, method, data, retryCount = 0) {
         const authStore = useAuthStore();
         const headers = {
             'Content-Type': 'application/json',
@@ -81,19 +81,19 @@ class ApiClient {
         });
     }
 
-    async get(id: string = '') {
+    async get(id) {
         return await this._fetch(id, 'GET')
     }
 
-    async post(data: any) {
+    async post(data) {
         return await this._fetch(undefined, 'POST', data);
     }
 
-    async put(url: string, data: any) {
+    async put(url, data) {
         return await this._fetch(url, 'PUT', data);
     }
 
-    async delete(url: string) {
+    async delete(url) {
         return await this._fetch(url, 'DELETE');
     }
 }
