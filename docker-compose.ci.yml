@@ -1,11 +1,11 @@
 services:
   app:
-    command: ["python", "manage.py", "runserver"]
+    command: [ "python", "manage.py", "runserver" ]
     build:
       context: ..
       dockerfile: Dockerfile
     environment:
-      DB_HOST: db
+      DB_HOST: localhost
     ports:
       - 8000:8000
     network_mode: ""
