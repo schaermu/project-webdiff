@@ -19,7 +19,9 @@ jobs:
       run: npm install -g pnpm@9
 
     - name: Start backend stack
-      run: docker compose -f .devcontainer/docker-compose.yml -f docker-compose.ci.yml up -d app db maildev
+      run: |
+        docker compose -f .devcontainer/docker-compose.yml -f docker-compose.ci.yml up -d app db maildev
+        docker compose -f .devcontainer/docker-compose.yml -f docker-compose.ci.yml logs app
 
     - name: Run cypress tests
       uses: cypress-io/github-action@v6
