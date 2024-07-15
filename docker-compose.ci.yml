@@ -1,0 +1,16 @@
+services:
+  app:
+    ports:
+      - "8000:8000"
+    network_mode: ""
+    networks: [ default ]
+
+  db:
+    ports:
+      - "5432:5432"
+
+  maildev:
+    ports:
+      - "1025:1025"
+    network_mode: ""
+    networks: [ default ]

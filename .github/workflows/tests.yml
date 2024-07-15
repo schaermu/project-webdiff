@@ -19,15 +19,18 @@ jobs:
       run: npm install -g pnpm@9
 
     - name: Start backend stack
-      run: docker compose -f .devcontainer/docker-compose.yml up -d app db maildev
+      run: docker compose -f .devcontainer/docker-compose.yml -f docker-compose.ci.yml up -d app db maildev
     
     - name: Setup & start Django backend
       run: |
-        docker compose -f .devcontainer/docker-compose.yml exec app pip install -r requirements-dev.txt
-        docker compose -f .devcontainer/docker-compose.yml exec app python manage.py migrate
-        docker compose -f .devcontainer/docker-compose.yml exec app python manage.py runserver 0.0.0.0:8000
+        alias dc='docker compose -f .devcontainer/docker-compose.yml -f docker-compose.ci.yml'
+        dc exec app pip install -r requirements-dev.txt
+        dc exec app python manage.py migrate
+        dc exec app python manage.py runserver 0.0.0.0:8000
+      env:
+        DB_HOST: localhost
 
-    - name: Cypress run
+    - name: Run cypress tests
       uses: cypress-io/github-action@v6
       with:
         browser: chrome
@@ -56,7 +59,9 @@ jobs:
         pip install -r requirements-dev.txt
 
     - name: Start PostgreSQL & Maildev
-      run: docker compose -f .devcontainer/docker-compose.yml up -d db maildev
+      run: |
+        alias dc='docker compose -f .devcontainer/docker-compose.yml -f docker-compose.ci.yml'
+        dc up -d db maildev
 
     - name: Test with pytest
       run: pytest --doctest-modules --cov --cov-report=xml
