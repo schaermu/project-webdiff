@@ -1,6 +1,0 @@
-{
-  "compilerOptions": {
-    "types": ["cypress", "mocha"]
-  },
-  "include": ["**/*.*"]
-}

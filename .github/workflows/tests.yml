@@ -8,48 +8,54 @@ on:
 jobs:
   frontend:
     runs-on: ubuntu-22.04
+    permissions:
+      pull-requests: write
+      contents: read
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+    - name: Checkout
+      uses: actions/checkout@v4
 
-      - name: Install pnpm
-        run: npm install -g pnpm@9
+    - name: Install pnpm
+      run: npm install -g pnpm@9
 
-      - name: Cypress run
-        uses: cypress-io/github-action@v6
-        with:
-          browser: chrome
-          component: true
-          working-directory: apps/frontend
+    - name: Start backend stack
+      run: |
+        docker compose -f .devcontainer/docker-compose.yml -f docker-compose.ci.yml up -d app db maildev
+
+    - name: Run cypress tests
+      uses: cypress-io/github-action@v6
+      with:
+        browser: chrome
+        command: pnpm test:ci
+        working-directory: apps/frontend
+        wait-on: 'http://localhost:8000/api/settings'
+        wait-on-timeout: 120
+
+    - name: Code Coverage Summary Report
+      uses: irongut/CodeCoverageSummary@v1.3.0
+      with:
+        filename: apps/frontend/coverage/cobertura-coverage.xml
+        badge: true
+        format: "markdown"
+        output: "both"
+
+    - name: Add Coverage PR Comment
+      uses: marocchino/sticky-pull-request-comment@v2
+      if: github.event_name == 'pull_request'
+      with:
+        recreate: true
+        header: frontend-coverage
+        path: code-coverage-results.md
+
+    - name: Write to Job Summary
+      run: cat code-coverage-results.md >> $GITHUB_STEP_SUMMARY
 
   backend:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
       contents: read
-
-    services:
-      postgres:
-        image: postgres
-        env:
-          POSTGRES_DB: webdiff
-          POSTGRES_USER: webdiff
-          POSTGRES_PASSWORD: webdiff
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          - 5432:5432
-        
-      maildev:
-        image: maildev/maildev
-        ports:
-          - 1080:1080
-          - 1025:1025
-        env:
-          MAILDEV_IP: "::"
 
     steps:
     - name: Checkout repository
@@ -65,12 +71,18 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements-dev.txt
-  
+
+    - name: Start PostgreSQL & Maildev
+      run: |
+        shopt -s expand_aliases
+        alias dc='docker compose -f .devcontainer/docker-compose.yml -f docker-compose.ci.yml'
+        dc up -d db maildev
+
     - name: Test with pytest
       run: pytest --doctest-modules --cov --cov-report=xml
       env:
         DB_HOST: localhost
-    
+  
     - name: Code Coverage Summary Report
       uses: irongut/CodeCoverageSummary@v1.3.0
       with:

@@ -4,7 +4,7 @@ import { computed, ref } from 'vue'
 import ApiClient from '@/utils/apiClient'
 
 export const useAuthStore = defineStore('auth', () => {
-  const authState = ref<AuthState>(), userState = ref<UserState>()
+  const authState = ref(), userState = ref()
 
   const accessToken = computed(() => authState.value?.access)
   const refreshToken = computed(() => authState.value?.refresh)
@@ -16,7 +16,7 @@ export const useAuthStore = defineStore('auth', () => {
     userState.value = (await apiClient.get('me')).data
   }
 
-  async function register(email: string, password: string, password2: string, captcha: string) {
+  async function register(email, password, password2, captcha) {
     const apiClient = new ApiClient('users/register', false)
     return await apiClient.post({
       email,
@@ -26,21 +26,21 @@ export const useAuthStore = defineStore('auth', () => {
     })
   }
 
-  async function verifyEmail(token: string) {
+  async function verifyEmail(token) {
     const apiClient = new ApiClient('users/verify-email', false)
     return await apiClient.post({
       token
     })
   }
 
-  async function resendVerifyEmail(token: string) {
+  async function resendVerifyEmail(token) {
     const apiClient = new ApiClient('users/resend-verification-email', false)
     return await apiClient.post({
       token
     })
   }
 
-  async function login(email: string, password: string, captcha: string) {
+  async function login(email, password, captcha) {
     const apiClient = new ApiClient('token', false)
     const loginRes = await apiClient.post({
       email,
@@ -76,12 +76,3 @@ export const useAuthStore = defineStore('auth', () => {
 
   return { authState, userState, accessToken, refreshToken, isAuthenticated, user, fetchUser, login, register, verifyEmail, resendVerifyEmail, logout, refresh }
 }, { persist: true })
-
-interface AuthState {
-  access: string
-  refresh: string
-}
-
-interface UserState {
-  firstname: string
-}

@@ -1,18 +1,15 @@
 {
-	"name": "Docker Compose (Extend)",
-	"dockerComposeFile": [
-		"../docker-compose.yml",
-		"docker-compose.yml"
-	],
-	"service": "webdiff",
-	"remoteUser": "appuser",
+	"name": "Python 3 & PostgreSQL",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",
 	"features": {
 		"ghcr.io/devcontainers/features/git:1": {},
-		"ghcr.io/devcontainers/features/node:1": {
-			"version": "20"
-		}
+		"ghcr.io/devcontainers/features/node": {
+			"version": 20
+		},
+		"ghcr.io/devcontainers/features/desktop-lite:1": {}
 	},
-	"workspaceFolder": "/workspace",
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 	"customizations": {
 		"vscode": {
 			"settings": {},
@@ -30,9 +27,18 @@
 		}
 	},
 	"forwardPorts": [
-		8000,
-		10000
+		1025,
+		1080,
+		4173,
+		5432,
+		5901,
+		6080,
+		8000
 	],
-	"postCreateCommand": "python3 -m venv .venv && . .venv/bin/activate && pip install -r requirements-dev.txt ",
-	"postAttachCommand": ". .venv/bin/activate"
+	"portsAttributes": {
+		"6080": {
+			"label": "desktop"
+		}
+	},
+	"postCreateCommand": "pip install -r requirements-dev.txt && (cd apps/frontend && pnpm install && npx cypress install)"
 }
