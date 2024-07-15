@@ -1,0 +1,13 @@
+.env*
+.pnpm-store
+.pytest_cache
+.venv
+.vscode
+.devcontainer
+.github
+.coverage
+coverage*
+
+__pycache__
+
+apps/frontend

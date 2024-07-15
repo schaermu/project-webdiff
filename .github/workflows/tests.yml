@@ -25,7 +25,6 @@ jobs:
       run: |
         shopt -s expand_aliases
         alias dc='docker compose -f .devcontainer/docker-compose.yml -f docker-compose.ci.yml'
-        dc exec app pip install -r requirements-dev.txt
         dc exec app python manage.py migrate
         dc exec app python manage.py runserver 0.0.0.0:8000
       env:

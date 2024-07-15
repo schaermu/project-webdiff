@@ -1,9 +1,16 @@
 services:
   app:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+      stage: ci
     ports:
       - "8000:8000"
     network_mode: ""
-    networks: [ default ]
+    networks:
+      - default
+    depends_on:
+      - db
 
   db:
     ports:
@@ -13,4 +20,5 @@ services:
     ports:
       - "1025:1025"
     network_mode: ""
-    networks: [ default ]
+    networks:
+      - default
