@@ -28,7 +28,7 @@ jobs:
         browser: chrome
         command: pnpm test:ci
         working-directory: apps/frontend
-        wait-on: 'http://localhost:4173, http://localhost:8000/api/settings'
+        wait-on: 'http://localhost:8000/api/settings'
         wait-on-timeout: 120
 
   backend:
