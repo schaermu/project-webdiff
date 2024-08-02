@@ -39,7 +39,7 @@
     "uuid": "^10.0.0",
     "vee-validate": "^4.13.2",
     "vue": "^3.4.35",
-    "vue-router": "^4.4.1",
+    "vue-router": "^4.4.2",
     "vue-turnstile": "^1.0.10",
     "yup": "^1.4.0"
   },
