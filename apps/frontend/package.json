@@ -24,7 +24,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "@tailwindcss/typography": "^0.5.13",
+    "@tailwindcss/typography": "^0.5.14",
     "@vee-validate/yup": "^4.13.2",
     "@vueuse/core": "^10.11.0",
     "autoprefixer": "^10.4.20",
@@ -35,7 +35,7 @@
     "pinia": "^2.2.1",
     "pinia-plugin-persistedstate": "^3.2.1",
     "postcss": "^8.4.41",
-    "tailwindcss": "^3.4.7",
+    "tailwindcss": "^3.4.8",
     "uuid": "^10.0.0",
     "vee-validate": "^4.13.2",
     "vue": "^3.4.36",
