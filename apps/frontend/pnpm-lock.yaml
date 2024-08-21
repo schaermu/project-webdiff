@@ -30,8 +30,8 @@ importers:
         specifier: ^2.5.1
         version: 2.5.1(rollup@4.21.0)
       flowbite-vue:
-        specifier: ^0.1.3
-        version: 0.1.5(tailwindcss@3.4.10)(vue@3.4.38(typescript@5.5.3))
+        specifier: ^0.1.6
+        version: 0.1.6(tailwindcss@3.4.10)(vue@3.4.38(typescript@5.5.3))
       pinia:
         specifier: ^2.2.2
         version: 2.2.2(typescript@5.5.3)(vue@3.4.38(typescript@5.5.3))
@@ -2134,8 +2134,8 @@ packages:
   flowbite-datepicker@1.3.0:
     resolution: {integrity: sha512-CLVqzuoE2vkUvWYK/lJ6GzT0be5dlTbH3uuhVwyB67+PjqJWABm2wv68xhBf5BqjpBxvTSQ3mrmLHpPJ2tvrSQ==}
 
-  flowbite-vue@0.1.5:
-    resolution: {integrity: sha512-BN87B0Dcm2/bxkUkjKLVD+aSTxUCS92ymIdVLO/yNIUz2bXdQM3H1onv/jMCGYmC1RVjoAR++/7SIGTp4w4h4Q==}
+  flowbite-vue@0.1.6:
+    resolution: {integrity: sha512-nk5mfIGeo5L+3bnaiGkT/U4Xk9qVM35TAhSmtu11elWe+efRnap+5jWWeljVKxo3kjVehd1PMmENjCGo25sNHg==}
     engines: {node: '>=18.x', npm: '>=10.x'}
     peerDependencies:
       tailwindcss: ^3
@@ -6257,7 +6257,7 @@ snapshots:
     transitivePeerDependencies:
       - rollup
 
-  flowbite-vue@0.1.5(tailwindcss@3.4.10)(vue@3.4.38(typescript@5.5.3)):
+  flowbite-vue@0.1.6(tailwindcss@3.4.10)(vue@3.4.38(typescript@5.5.3)):
     dependencies:
       '@vueuse/core': 10.10.0(vue@3.4.38(typescript@5.5.3))
       classnames: 2.5.1
@@ -7536,7 +7536,7 @@ snapshots:
 
   tailwind-merge@2.3.0:
     dependencies:
-      '@babel/runtime': 7.24.6
+      '@babel/runtime': 7.25.0
 
   tailwindcss@3.4.10:
     dependencies:
