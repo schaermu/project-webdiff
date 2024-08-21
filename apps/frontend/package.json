@@ -26,7 +26,7 @@
   "dependencies": {
     "@tailwindcss/typography": "^0.5.14",
     "@vee-validate/yup": "^4.13.2",
-    "@vueuse/core": "^11.0.0",
+    "@vueuse/core": "^11.0.1",
     "autoprefixer": "^10.4.20",
     "d": "^1.0.2",
     "daisyui": "^4.12.10",
@@ -40,7 +40,7 @@
     "vee-validate": "^4.13.2",
     "vue": "^3.4.38",
     "vue-router": "^4.4.3",
-    "vue-turnstile": "^1.0.10",
+    "vue-turnstile": "^1.0.11",
     "yup": "^1.4.0"
   },
   "devDependencies": {
