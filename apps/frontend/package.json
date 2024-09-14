@@ -35,7 +35,7 @@
     "pinia": "^2.2.2",
     "pinia-plugin-persistedstate": "^4.0.1",
     "postcss": "^8.4.45",
-    "tailwindcss": "^3.4.10",
+    "tailwindcss": "^3.4.11",
     "uuid": "^10.0.0",
     "vee-validate": "^4.13.2",
     "vue": "^3.5.5",
